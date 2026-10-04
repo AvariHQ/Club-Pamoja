@@ -53,7 +53,7 @@ const isActive = (g: (typeof primaryNav)[number]) =>
     </nav>
 
     <div class="site-header__actions">
-      <ActionLink action="signIn" variant="outline" size="sm" class="hide-mobile" />
+      <ActionLink action="signIn" variant="ghost" size="sm" class="hide-mobile" icon />
       <ActionLink action="apply" size="sm" class="hide-mobile" />
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" data-menu-toggle>
         <span class="menu-toggle__icon" aria-hidden="true"><span></span><span></span></span>
@@ -159,7 +159,7 @@ const isActive = (g: (typeof primaryNav)[number]) =>
     min-height: var(--header-h);
   }
   .site-header__brand { text-decoration: none; flex: none; }
-  .site-header__actions { margin-left: auto; display: flex; align-items: center; gap: var(--space-3); }
+  .site-header__actions { margin-left: auto; display: flex; align-items: center; gap: var(--space-2); flex: none; }
 
   /* Desktop nav */
   .nav-desktop { display: none; }
@@ -172,7 +172,7 @@ const isActive = (g: (typeof primaryNav)[number]) =>
   .nav-desktop__trigger {
     display: inline-flex; align-items: center; gap: .35rem;
     min-height: var(--tap);
-    padding: 0 .6rem;
+    padding: 0 .55rem;
     border: 0; background: none;
     font-size: .9375rem; font-weight: 550; white-space: nowrap;
     color: var(--cp-teal-900);
@@ -187,7 +187,7 @@ const isActive = (g: (typeof primaryNav)[number]) =>
   .nav-desktop__trigger:hover::after,
   .nav-desktop__trigger[aria-expanded='true']::after,
   .nav-desktop__trigger.is-current::after { transform: scaleX(1); }
-  .chev { width: 12px; height: 12px; transition: transform var(--duration-fast); }
+  .chev { flex: none; width: 12px; height: 12px; transition: transform var(--duration-fast); }
   .nav-desktop__trigger[aria-expanded='true'] .chev { transform: rotate(180deg); }
 
   .mega {

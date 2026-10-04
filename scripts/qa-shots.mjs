@@ -5,7 +5,9 @@ const out = process.argv[2] || 'qa';
 const paths = process.argv.slice(3).length ? process.argv.slice(3) : ['/'];
 const BASE = process.env.BASE || 'http://127.0.0.1:4400';
 const browser = await chromium.launch({ executablePath: process.env.CHROMIUM || undefined });
-const sizes = { mobile: [375, 812], tablet: [820, 1180], desktop: [1440, 900] };
+const ALL = { 375: [375, 812], 390: [390, 844], 430: [430, 932], 820: [820, 1180], 1024: [1024, 768], 1280: [1280, 800], 1440: [1440, 900] };
+// WIDTHS=375,1440 to limit; default = all seven QA widths.
+const sizes = Object.fromEntries((process.env.WIDTHS ? process.env.WIDTHS.split(',') : Object.keys(ALL)).map((w) => [w, ALL[w]]));
 for (const p of paths) {
   for (const [name, [w, h]] of Object.entries(sizes)) {
     const page = await browser.newPage({ viewport: { width: w, height: h } });

@@ -151,7 +151,10 @@ a:hover { color: var(--color-link-hover); text-decoration-thickness: 2px; }
 .btn--outline:hover { --btn-bg: var(--cp-teal-900); --btn-fg: var(--cp-white); }
 .on-dark .btn--outline, .btn--outline-light { --btn-bg: transparent; --btn-fg: var(--cp-white); --btn-border: rgba(255,255,255,.55); }
 .on-dark .btn--outline:hover, .btn--outline-light:hover { --btn-bg: var(--cp-white); --btn-fg: var(--cp-teal-900); --btn-border: var(--cp-white); }
-.btn--sm { min-height: 40px; padding: 0.5rem 1rem; font-size: var(--step--1); }
+.btn--ghost { --btn-bg: transparent; --btn-fg: var(--cp-teal-900); --btn-border: transparent; }
+.btn--ghost:hover { --btn-bg: var(--color-bg-alt); --btn-fg: var(--cp-teal-900); --btn-border: var(--color-border); }
+.btn__icon { width: 1.15em; height: 1.15em; flex: none; }
+.btn--sm { min-height: var(--tap); padding: 0.5rem 1rem; font-size: var(--step--1); }
 .btn .arrow { transition: transform var(--duration-fast) var(--ease-out); }
 .btn:hover .arrow { transform: translateX(3px); }
 

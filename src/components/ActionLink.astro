@@ -4,18 +4,21 @@ import { actions } from '../config/site';
 
 interface Props {
   action: 'apply' | 'signIn';
-  variant?: 'primary' | 'gold' | 'outline' | 'outline-light' | 'link';
+  variant?: 'primary' | 'gold' | 'outline' | 'outline-light' | 'ghost' | 'link';
+  /** Leading icon (sign-in: person; apply: none). */
+  icon?: boolean;
   size?: 'sm' | 'md';
   class?: string;
   arrow?: boolean;
 }
-const { action, variant = 'primary', size = 'md', arrow = false, class: cls = '' } = Astro.props;
+const { action, variant = 'primary', size = 'md', arrow = false, icon = false, class: cls = '' } = Astro.props;
 const a = actions[action];
 const classes = [
   variant === 'link' ? 'text-link' : 'btn',
   variant === 'gold' && 'btn--gold',
   variant === 'outline' && 'btn--outline',
   variant === 'outline-light' && 'btn--outline-light',
+  variant === 'ghost' && 'btn--ghost',
   size === 'sm' && variant !== 'link' && 'btn--sm',
   cls,
 ].filter(Boolean).join(' ');
@@ -26,5 +29,8 @@ const classes = [
   data-action={action}
   {...(a.external ? { rel: 'noopener' } : {})}
 >
+  {icon && action === 'signIn' && (
+    <svg class="btn__icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="7" r="3.25" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M3.75 17c.9-3 3.3-4.5 6.25-4.5s5.35 1.5 6.25 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+  )}
   {a.label}{arrow && <span class="arrow" aria-hidden="true">→</span>}
 </a>
