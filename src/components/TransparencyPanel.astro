@@ -1,0 +1,40 @@
+---
+/** Transparency pillar. Editorial statement + links into the accountability pages. Review: CR-08 */
+import ReviewNote from './ReviewNote.astro';
+const lines = ['Every campaign.', 'Every contribution.', 'Every fee.', 'Every disbursement.'];
+const links = [
+  { label: 'Our transparency commitment', href: '/transparency/' },
+  { label: 'Reports', href: '/reports/' },
+  { label: 'Governance', href: '/governance/' },
+  { label: 'Contribution rules', href: '/contributions-fees/' },
+];
+---
+<div class="tp">
+  <div class="tp__statement" data-reveal>
+    <p class="eyebrow">Transparency</p>
+    <h2 class="tp__lines">
+      {lines.map((l) => <span>{l}</span>)}
+      <span class="tp__final">Accounted for.</span>
+    </h2>
+    <ReviewNote id="CR-08">Confirm this statement accurately reflects how campaigns, fees and disbursements are recorded and reported to members.</ReviewNote>
+  </div>
+  <div class="tp__side" data-reveal>
+    <p class="lede">Mutual aid depends on trust, and trust depends on records. Amounts are fixed and published in advance, and Club Pamoja is administered under written bylaws rather than informal arrangement.</p>
+    <ul class="tp__links">
+      {links.map((l) => <li><a href={l.href}>{l.label}<span aria-hidden="true">→</span></a></li>)}
+    </ul>
+  </div>
+</div>
+<style>
+  .tp { display: grid; gap: var(--space-7); align-items: end; }
+  @media (min-width: 960px) { .tp { grid-template-columns: 1.2fr 1fr; gap: var(--space-9); } }
+  .tp__lines { margin-top: var(--space-5); font-size: var(--step-5); line-height: 1.05; }
+  .tp__lines span { display: block; }
+  .tp__final { font-style: italic; color: var(--cp-gold-500) !important; margin-top: .15em; }
+  .tp__links { list-style: none; padding: 0; margin-top: var(--space-6); border-top: 1px solid var(--color-border-inverse); }
+  .tp__links a {
+    display: flex; justify-content: space-between; align-items: center; min-height: 3.25rem;
+    border-bottom: 1px solid var(--color-border-inverse); text-decoration: none; font-weight: 550;
+  }
+  .tp__links a:hover { color: var(--cp-gold-500) !important; }
+</style>

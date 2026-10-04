@@ -1,0 +1,50 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import ResourceCards from '../components/ResourceCards.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import ActionLink from '../components/ActionLink.astro';
+import { faqs } from '../data/faq';
+const crumbs = [{ label: 'Resources', href: '/help/' }];
+---
+<PageLayout
+  title="Help centre"
+  description="Help for Club Pamoja members and applicants: joining, fees and contributions, reporting a loss, member portal sign-in, and policies."
+  eyebrow="Resources"
+  lede="Find what you need, whether you are considering membership, are already a member, or need to report a loss."
+  breadcrumbs={crumbs}
+>
+  <section class="section">
+    <div class="container">
+      <SectionHeader eyebrow="I want to…" title="Start here." />
+      <ResourceCards items={[
+        { kicker: 'Considering', title: 'Understand membership', body: 'What Club Pamoja is and what members commit to.', href: '/membership/' },
+        { kicker: 'Joining', title: 'Apply for membership', body: 'Referral or direct application during Open Enrollment.', href: '/how-to-join/' },
+        { kicker: 'Costs', title: 'Check fees and contributions', body: 'Every amount, and when it applies.', href: '/contributions-fees/' },
+        { kicker: 'Urgent', title: 'Report a loss', body: 'What to do first when someone has died.', href: '/contact/#report-a-loss' },
+        { kicker: 'Members', title: 'Update my family records', body: 'Beneficiaries and registered family members.', href: '/beneficiaries/' },
+        { kicker: 'Policies', title: 'Read the rules', body: 'Bylaws, terms and privacy.', href: '/legal/' },
+      ]} />
+    </div>
+  </section>
+
+  <section class="section section--alt" id="member-portal" aria-labelledby="portal-help">
+    <div class="container container--narrow">
+      <div class="prose">
+        <p class="eyebrow">Member portal</p>
+        <h2 id="portal-help">Signing in</h2>
+        <p>The member portal is separate from this public website. Use the <strong>Member Sign In</strong> button at the top of any page to reach it.</p>
+        <p>If you cannot sign in, <a href="/contact/">contact administration</a>.</p>
+        <p><ActionLink action="signIn" /></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <SectionHeader eyebrow="Questions" title="Most asked." />
+      <FAQAccordion items={faqs.filter((f) => f.featured)} />
+      <p class="related"><a class="text-link" href="/faq/">All questions <span aria-hidden="true">→</span></a></p>
+    </div>
+  </section>
+</PageLayout>

@@ -1,0 +1,41 @@
+---
+/**
+ * The core conceptual device: join → stand with others → community stands with you.
+ * A circular, reciprocal sequence rather than a funnel.
+ */
+const beats = [
+  { k: 'Before', title: 'Join before you need support', body: 'Membership is arranged in ordinary times, while there is room to think clearly and register the people who matter.' },
+  { k: 'Together', title: 'Stand with another family', body: 'When a member family suffers a loss, members respond together with a fixed, known contribution.' },
+  { k: 'When it is you', title: 'Your community stands with you', body: 'When loss reaches your family, the same organized community is already in place for you.' },
+];
+interface Props { inverse?: boolean }
+const { inverse = false } = Astro.props;
+---
+<ol class:list={['story', { 'story--inverse': inverse }]} aria-label="How mutual aid works">
+  {beats.map((b, i) => (
+    <li class="story__beat" data-reveal style={`transition-delay:${i * 90}ms`}>
+      <p class="story__k">{b.k}</p>
+      <h3 class="story__title">{b.title}</h3>
+      <p class="story__body">{b.body}</p>
+      {i < beats.length - 1 && <span class="story__arrow" aria-hidden="true">→</span>}
+    </li>
+  ))}
+</ol>
+
+<style>
+  .story { list-style: none; padding: 0; display: grid; gap: 0; counter-reset: beat; }
+  .story__beat { position: relative; padding: var(--space-6) 0; border-top: 1px solid var(--color-border-strong); }
+  .story__k { font-size: var(--step--1); font-weight: 650; letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--color-accent-text); }
+  .story__title { font-size: var(--step-3); margin: var(--space-3) 0; max-width: 16ch; }
+  .story__body { color: var(--color-text-muted); max-width: 36ch; }
+  .story__arrow { display: none; }
+  @media (min-width: 900px) {
+    .story { grid-template-columns: repeat(3, 1fr); }
+    .story__beat { padding: var(--space-6) var(--space-6) 0 0; }
+    .story__arrow { display: block; position: absolute; right: var(--space-5); top: var(--space-6); font-size: var(--step-2); color: var(--cp-gold-600); }
+  }
+  .story--inverse .story__beat { border-top-color: rgba(200, 167, 112, .45); }
+  .story--inverse .story__k { color: var(--cp-gold-500); }
+  .story--inverse .story__body { color: var(--color-text-inverse-muted); }
+  .story--inverse .story__arrow { color: var(--cp-gold-500); }
+</style>

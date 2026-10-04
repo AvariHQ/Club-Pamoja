@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ActionLink from '../components/ActionLink.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import StorySequence from '../components/StorySequence.astro';
+import ProcessTimeline from '../components/ProcessTimeline.astro';
+import FeeBreakdown from '../components/FeeBreakdown.astro';
+import CoverageGrid from '../components/CoverageGrid.astro';
+import TransparencyPanel from '../components/TransparencyPanel.astro';
+import PortalShowcase from '../components/PortalShowcase.astro';
+import TrustPanel from '../components/TrustPanel.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import CTASection from '../components/CTASection.astro';
+import { site } from '../config/site';
+import { memberJourney, bereavementStages, membershipFunctions } from '../data/content';
+import { faqs } from '../data/faq';
+
+const featured = faqs.filter((f) => f.featured).slice(0, 6);
+---
+<BaseLayout
+  title="Home"
+  path="/"
+  description="Club Pamoja is a professionally administered mutual-aid community for the Kenyan diaspora in the United States, organized around coordinated bereavement support. Open Enrollment is now open."
+>
+  <!-- B. Hero -->
+  <section class="hero">
+    <div class="container container--wide hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow">Kenyan diaspora mutual aid · United States</p>
+        <h1>When loss comes, your community should <em>already be in place.</em></h1>
+        <p class="lede">
+          Club Pamoja is an organized mutual-aid community for the Kenyan diaspora in the United States.
+          Members prepare together in ordinary times, so that when a death occurs, coordinated support is already in place.
+        </p>
+        <div class="cluster hero__actions">
+          <ActionLink action="apply" arrow />
+          <a class="btn btn--outline" href="/how-it-works/">See How It Works</a>
+        </div>
+        <p class="hero__qualifier">
+          <span aria-hidden="true" class="hero__rule"></span>
+          <strong>{site.qualifier}</strong>
+          <a href="/legal/">What that means</a>
+        </p>
+      </div>
+      <div class="hero__media">
+        <ImagePlaceholder id="CP-HERO-01" eager sizes="(min-width: 1024px) 45vw, 100vw" />
+      </div>
+    </div>
+  </section>
+
+  <!-- C. Pamoja means together -->
+  <section class="section section--alt" aria-labelledby="pamoja">
+    <div class="container editorial">
+      <div class="editorial__copy" data-reveal>
+        <p class="eyebrow">Pamoja means together</p>
+        <h2 id="pamoja">A Kiswahili word for a very old idea.</h2>
+        <p class="editorial__lead">
+          At home, when a family lost someone, the community arrived. Neighbours, relatives and friends gathered, contributed,
+          and carried the weight together.
+        </p>
+        <p>
+          Far from home, that circle can be harder to find at the moment it matters most. Club Pamoja exists so that the
+          Kenyan diaspora in the United States does not have to assemble it in the middle of a crisis.
+          The community is organized beforehand, with clear rules, known contributions and professional administration.
+        </p>
+        <a class="text-link" href="/about/">About Club Pamoja <span aria-hidden="true">→</span></a>
+      </div>
+      <ImagePlaceholder id="CP-COMMUNITY-01" />
+    </div>
+  </section>
+
+  <!-- D. Community before the emergency -->
+  <section class="section" aria-labelledby="before">
+    <div class="container">
+      <SectionHeader id="before" eyebrow="Community before the emergency" title="Prepared in ordinary times. <em>Present</em> when it counts." lede="Mutual aid works because it is reciprocal and arranged ahead of time. Every member is part of the same circle." />
+      <StorySequence />
+    </div>
+  </section>
+
+  <!-- E. How it works -->
+  <section class="section on-dark" aria-labelledby="how">
+    <div class="container">
+      <SectionHeader id="how" eyebrow="How it works" title="Four stages of membership." lede="Clear, simple steps from application to support." />
+      <ProcessTimeline steps={memberJourney} label="Membership journey" inverse />
+    </div>
+  </section>
+
+  <!-- F. What membership connects you to -->
+  <section class="section" aria-labelledby="connects">
+    <div class="container">
+      <SectionHeader id="connects" eyebrow="Membership" title="What membership connects you to." />
+      <ul class="functions">
+        {membershipFunctions.map((f, i) => (
+          <li data-reveal style={`transition-delay:${(i % 3) * 60}ms`}>
+            <span class="functions__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="section-more"><a class="text-link" href="/membership/">Membership in detail <span aria-hidden="true">→</span></a></p>
+    </div>
+  </section>
+
+  <!-- G. Eligible family -->
+  <section class="section section--warm" aria-labelledby="family">
+    <div class="container grid-2 family">
+      <div>
+        <SectionHeader id="family" eyebrow="Who can be registered" title="Your membership extends to your family." lede="Members register eligible family members. When an eligible registered family member dies, the community is called to contribute." />
+        <ImagePlaceholder id="CP-FAMILY-01" />
+      </div>
+      <div class="family__diagram">
+        <CoverageGrid />
+        <p class="section-more"><a class="text-link" href="/coverage/">Eligible family in detail <span aria-hidden="true">→</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- H. Fees -->
+  <section class="section" aria-labelledby="fees">
+    <div class="container">
+      <SectionHeader id="fees" eyebrow="Fees and contributions" title="Every amount, stated plainly." lede="There are two one-off costs to join. After that, members contribute a set amount when the community is called after a death." />
+      <FeeBreakdown />
+      <p class="section-more"><a class="text-link" href="/contributions-fees/">Full contribution rules <span aria-hidden="true">→</span></a></p>
+    </div>
+  </section>
+
+  <!-- I. Transparency -->
+  <section class="section on-dark" aria-label="Transparency">
+    <div class="container"><TransparencyPanel /></div>
+  </section>
+
+  <!-- J. When a loss occurs -->
+  <section class="section section--alt" aria-labelledby="loss">
+    <div class="container">
+      <SectionHeader id="loss" eyebrow="When a loss occurs" title="A defined process, so families are not left to improvise." lede="From the first call to the final record, each stage is defined in advance." />
+      <ol class="stages" aria-label="Bereavement process stages">
+        {bereavementStages.map((s, i) => (
+          <li data-reveal style={`transition-delay:${i * 50}ms`}>
+            <span class="stages__n" aria-hidden="true">{i + 1}</span>
+            <span class="stages__t">{s.title}</span>
+          </li>
+        ))}
+      </ol>
+      <div class="cluster section-more">
+        <a class="btn btn--outline" href="/bereavement-process/">The bereavement process</a>
+        <a class="text-link" href="/contact/#report-a-loss">Report a loss <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- K. Member portal -->
+  <section class="section" aria-label="Member portal">
+    <div class="container"><PortalShowcase /></div>
+  </section>
+
+  <!-- L. Trust -->
+  <section class="section section--alt" aria-labelledby="trust">
+    <div class="container">
+      <SectionHeader id="trust" eyebrow="Why members trust Club Pamoja" title="An institution, not an informal collection." />
+      <TrustPanel />
+    </div>
+  </section>
+
+  <!-- M. FAQ -->
+  <section class="section" aria-labelledby="faq">
+    <div class="container faq-preview">
+      <div>
+        <SectionHeader id="faq" eyebrow="Questions" title="Common questions." />
+        <a class="btn btn--outline" href="/faq/">All questions</a>
+      </div>
+      <FAQAccordion items={featured} />
+    </div>
+  </section>
+
+  <!-- N. Final CTA -->
+  <CTASection />
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero { padding-block: var(--space-7) var(--section-y-tight); background: linear-gradient(180deg, var(--cp-white), var(--cp-sand-50)); overflow: hidden; }
+  .hero__grid { display: grid; gap: var(--space-7); align-items: center; }
+  @media (min-width: 1024px) { .hero__grid { grid-template-columns: 1.15fr 1fr; gap: var(--space-8); padding-block: var(--space-6); } }
+  .hero__copy > * + * { margin-top: var(--space-5); }
+  .hero h1 { font-size: clamp(2.35rem, 1.6rem + 3.4vw, 4.6rem); line-height: 1.04; letter-spacing: -0.02em; max-width: 15ch; }
+  .hero h1 em { font-style: italic; color: var(--cp-teal-700); }
+  .hero .lede { max-width: 38rem; }
+  .hero__actions { margin-top: var(--space-6) !important; }
+  .hero__qualifier { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); font-size: .9375rem; color: var(--color-text-muted); }
+  .hero__qualifier strong { color: var(--cp-teal-900); letter-spacing: .02em; }
+  .hero__rule { width: 2rem; height: 1px; background: var(--cp-gold-600); }
+
+  /* Editorial */
+  .editorial { display: grid; gap: var(--space-7); align-items: center; }
+  @media (min-width: 960px) { .editorial { grid-template-columns: 1fr 1fr; gap: var(--space-9); } }
+  .editorial__copy > * + * { margin-top: var(--space-5); }
+  .editorial__lead { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.4; color: var(--cp-teal-900); }
+  .editorial__copy p:not(.eyebrow):not(.editorial__lead) { color: var(--color-text-muted); max-width: var(--measure); }
+
+  /* Functions */
+  .functions { list-style: none; padding: 0; display: grid; gap: var(--space-6) var(--space-7); }
+  @media (min-width: 720px) { .functions { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .functions { grid-template-columns: repeat(3, 1fr); } }
+  .functions li { padding-top: var(--space-5); border-top: 1px solid var(--color-border-strong); }
+  .functions__n { font-family: var(--font-display); color: var(--color-accent-text); font-size: var(--step-1); }
+  .functions h3 { margin: var(--space-2) 0; }
+  .functions p { color: var(--color-text-muted); }
+  .section-more { margin-top: var(--space-7); }
+
+  .family { align-items: start; }
+  .family :global(.sh) { margin-bottom: var(--space-6); }
+  @media (min-width: 900px) { .family__diagram { padding-top: var(--space-9); } }
+
+  /* Stages */
+  .stages { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--color-border-strong); border: 1px solid var(--color-border-strong); border-radius: var(--radius-md); overflow: hidden; }
+  @media (min-width: 768px) { .stages { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1100px) { .stages { grid-template-columns: repeat(6, 1fr); } }
+  .stages li { background: var(--cp-white); padding: var(--space-5); min-height: 8rem; display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-4); }
+  .stages__n { font-family: var(--font-display); font-size: var(--step-3); color: var(--cp-gold-600); line-height: 1; }
+  .stages__t { font-weight: 600; color: var(--cp-teal-900); line-height: 1.35; }
+
+  .faq-preview { display: grid; gap: var(--space-6); }
+  @media (min-width: 960px) { .faq-preview { grid-template-columns: 1fr 1.7fr; gap: var(--space-9); } }
+</style>

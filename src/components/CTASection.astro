@@ -1,0 +1,31 @@
+---
+import ActionLink from './ActionLink.astro';
+interface Props { title?: string; body?: string; secondary?: { label: string; href: string } }
+const {
+  title = 'Don’t wait for the phone call to decide who will stand with you.',
+  body = 'Membership is arranged in ordinary times, so that when loss comes, your community is already in place.',
+  secondary = { label: 'See how it works', href: '/how-it-works/' },
+} = Astro.props;
+---
+<section class="cta on-dark" aria-labelledby="cta-title">
+  <div class="container cta__inner" data-reveal>
+    <svg class="cta__mark" viewBox="0 0 200 120" aria-hidden="true">
+      <circle cx="78" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.18)" />
+      <circle cx="122" cy="60" r="52" fill="none" stroke="#C8A770" stroke-opacity=".6" />
+    </svg>
+    <h2 id="cta-title">{title}</h2>
+    <p class="lede">{body}</p>
+    <div class="cluster cta__actions">
+      <ActionLink action="apply" variant="gold" arrow />
+      <a class="btn btn--outline-light" href={secondary.href}>{secondary.label}</a>
+    </div>
+  </div>
+</section>
+<style>
+  .cta { padding-block: var(--section-y); text-align: center; overflow: hidden; }
+  .cta__inner { max-width: 52rem; }
+  .cta__mark { width: 7.5rem; margin: 0 auto var(--space-6); }
+  .cta h2 { font-size: var(--step-4); }
+  .cta .lede { margin: var(--space-5) auto 0; }
+  .cta__actions { justify-content: center; margin-top: var(--space-7); }
+</style>

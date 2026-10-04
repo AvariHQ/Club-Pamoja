@@ -1,0 +1,94 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import ActionLink from '../components/ActionLink.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ProcessTimeline from '../components/ProcessTimeline.astro';
+import Callout from '../components/Callout.astro';
+import ReviewNote from '../components/ReviewNote.astro';
+import { actions, fees, usd, site } from '../config/site';
+
+const crumbs = [{ label: 'Membership', href: '/membership/' }, { label: 'How to join', href: '/how-to-join/' }];
+const steps = [
+  { title: 'Choose your path', body: 'Join through a referral from an existing member, or apply directly while Open Enrollment is open.' },
+  { title: 'Submit your application', body: `Complete the membership application and pay the ${usd(fees.application)} application fee.` },
+  { title: 'Verification', body: 'Club Pamoja administration reviews your application.' },
+  { title: 'Activate', body: `Once approved, pay the one-time ${usd(fees.activation)} activation fee to activate your membership.` },
+  { title: 'Register your family', body: 'Sign in to the member portal and record your eligible family members and beneficiary details.' },
+];
+---
+<PageLayout
+  title="How to join Club Pamoja"
+  description="There are two ways to join Club Pamoja: through a member referral, or by applying directly during Open Enrollment. Open Enrollment is now open."
+  eyebrow="Membership"
+  lede="There are two ways to become a member. Open Enrollment is open now, so you can apply directly without a referral."
+  breadcrumbs={crumbs}
+>
+  <section class="section">
+    <div class="container">
+      <SectionHeader eyebrow="Two paths" title="Choose how you join." />
+      <div class="paths">
+        <article class="path" id="referral">
+          <p class="path__k">Path 01</p>
+          <h3>By referral</h3>
+          <p>An existing Club Pamoja member refers you. A referral is a way of joining through someone who already belongs to the community.</p>
+          <ReviewNote id="CR-09">Confirm how referrals work in practice (referral code/link? does the referrer have any obligations?) and whether referrals are accepted outside Open Enrollment.</ReviewNote>
+          <p class="muted small">If a member has referred you, follow the instructions they shared with you, or contact administration.</p>
+        </article>
+        <article class="path path--open" id="open-enrollment">
+          <p class="path__k">Path 02 · Open now</p>
+          <h3>Direct application during Open Enrollment</h3>
+          <p>During Open Enrollment, anyone who meets the membership requirements may apply directly, without a referral.</p>
+          <a class="text-link" href="/open-enrollment/">About Open Enrollment <span aria-hidden="true">→</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <SectionHeader eyebrow="Step by step" title="From application to active membership." />
+      <ProcessTimeline steps={steps} label="Steps to join" layout="vertical" />
+      <ReviewNote id="CR-04">Confirm step order, what verification involves, and when the activation fee is paid relative to approval.</ReviewNote>
+    </div>
+  </section>
+
+  <section class="section" id="apply" aria-labelledby="apply-title">
+    <div class="container container--narrow">
+      <div class="apply">
+        <p class="eyebrow">Apply</p>
+        <h2 id="apply-title">Ready to apply?</h2>
+        <p class="lede">The application takes place in Club Pamoja’s secure membership system. Before you start, have ready:</p>
+        <ul class="apply__list">
+          <li>Your contact details</li>
+          <li>Details of the family members you intend to register</li>
+          <li>A payment method for the {usd(fees.application)} application fee</li>
+        </ul>
+        <ReviewNote id="CR-11">Confirm the exact information requested on the application, and accepted payment methods.</ReviewNote>
+        {actions.apply.external ? (
+          <ActionLink action="apply" arrow />
+        ) : (
+          <Callout tone="notice" title="Online application link coming soon">
+            <p>The online application link is being connected to this website. In the meantime, please <a href="/contact/">contact Club Pamoja</a> to apply.</p>
+          </Callout>
+        )}
+        <p class="small muted">By applying you agree to follow the Club Pamoja <a href="/bylaws/">bylaws</a>, including the contribution obligations described in <a href="/contributions-fees/">Contributions &amp; fees</a>. Read our <a href="/privacy/">privacy information</a>.</p>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .paths { display: grid; gap: var(--space-5); }
+  @media (min-width: 900px) { .paths { grid-template-columns: 1fr 1fr; } }
+  .path { padding: var(--space-6); border: 1px solid var(--color-border-strong); border-radius: var(--radius-md); display: flex; flex-direction: column; gap: var(--space-3); }
+  .path--open { background: var(--cp-teal-900); border-color: var(--cp-teal-900); color: var(--cp-white); }
+  .path--open h3 { color: var(--cp-white); }
+  .path--open a { color: var(--cp-white); }
+  .path__k { font-size: var(--step--1); font-weight: 650; text-transform: uppercase; letter-spacing: var(--tracking-eyebrow); color: var(--color-accent-text); }
+  .path--open .path__k { color: var(--cp-gold-500); }
+  .path p:not(.path__k) { color: inherit; }
+  .apply { padding: var(--space-7) var(--space-6); border: 1px solid var(--color-border-strong); border-radius: var(--radius-lg); background: var(--color-bg-alt); }
+  .apply > * + * { margin-top: var(--space-4); }
+  .apply__list { padding-left: 1.2em; }
+  .apply__list li::marker { color: var(--cp-gold-600); }
+</style>

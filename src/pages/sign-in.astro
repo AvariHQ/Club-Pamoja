@@ -1,0 +1,27 @@
+---
+/** Member portal handoff. Used only when PUBLIC_PORTAL_URL is not configured. Not indexed. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { actions } from '../config/site';
+const portal = import.meta.env.PUBLIC_PORTAL_URL;
+---
+<BaseLayout title="Member Sign In" description="Sign in to the Club Pamoja member portal." noindex>
+  <section class="section">
+    <div class="container container--prose signin">
+      <p class="eyebrow">Members</p>
+      <h1>{actions.signIn.label}</h1>
+      {portal ? (
+        <>
+          <p class="lede">Continue to the secure Club Pamoja member portal.</p>
+          <a class="btn" href={portal} rel="noopener">Continue to the member portal</a>
+        </>
+      ) : (
+        <>
+          <p class="lede">The member portal link is being connected to this website.</p>
+          <p>If you need to reach your membership in the meantime, please <a href="/contact/">contact administration</a>.</p>
+        </>
+      )}
+      <p class="small muted">Only sign in through links on this website. <a href="/safety/">Safety tips</a>.</p>
+    </div>
+  </section>
+</BaseLayout>
+<style>.signin > * + * { margin-top: var(--space-5); }</style>

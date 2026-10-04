@@ -1,0 +1,44 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import ResourceCards from '../components/ResourceCards.astro';
+import Callout from '../components/Callout.astro';
+const crumbs = [{ label: 'Legal', href: '/legal/' }];
+---
+<PageLayout
+  title="Legal &amp; policies"
+  metaTitle="Legal"
+  description="Club Pamoja legal information: mutual-aid status (not insurance), bylaws, terms of use, privacy and accessibility."
+  eyebrow="Legal"
+  lede="The formal documents that govern Club Pamoja and this website."
+  breadcrumbs={crumbs}
+  cta={false}
+>
+  <section class="section" id="mutual-aid">
+    <div class="container">
+      <div class="split">
+        <div class="split__head"><p class="eyebrow">Status</p><h2>Mutual aid, not insurance.</h2></div>
+        <div class="prose">
+          <Callout tone="obligation" title="Important">
+            <p>Club Pamoja is a mutual-aid community. It is not an insurance company and does not sell insurance.</p>
+          </Callout>
+          <ul>
+            <li>Membership is not an insurance policy.</li>
+            <li>Fees and contributions are not insurance premiums.</li>
+            <li>Bereavement support is provided by members to members under the Club Pamoja bylaws. It is not an insurance benefit.</li>
+          </ul>
+          <p>If you need insurance, such as life insurance, speak to a licensed insurance professional. Club Pamoja membership does not replace it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section section--alt">
+    <div class="container">
+      <ResourceCards columns={2} items={[
+        { kicker: 'Governing document', title: 'Bylaws', body: 'The authoritative rules of Club Pamoja.', href: '/bylaws/' },
+        { kicker: 'Website', title: 'Terms of use', body: 'Terms for using this public website.', href: '/terms/' },
+        { kicker: 'Data', title: 'Privacy', body: 'How information is handled.', href: '/privacy/' },
+        { kicker: 'Inclusion', title: 'Accessibility', body: 'Our accessibility commitment.', href: '/accessibility/' },
+      ]} />
+    </div>
+  </section>
+</PageLayout>

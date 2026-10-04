@@ -1,0 +1,30 @@
+---
+/**
+ * Interim wordmark. TODO(brand): replace with the official Club Pamoja logo files
+ * (SVG, light + dark versions). The mark — two arcs meeting — stands for "together".
+ */
+interface Props { inverse?: boolean }
+const { inverse = false } = Astro.props;
+---
+<span class:list={['logo', { 'logo--inverse': inverse }]}>
+  <svg class="logo__mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+    <circle cx="15" cy="20" r="11" fill="none" stroke="currentColor" stroke-width="2.2" />
+    <circle cx="25" cy="20" r="11" fill="none" stroke="#C8A770" stroke-width="2.2" />
+  </svg>
+  <span class="logo__word">Club <em>Pamoja</em></span>
+</span>
+
+<style>
+  .logo { display: inline-flex; align-items: center; gap: .6rem; color: var(--cp-teal-900); }
+  .logo--inverse { color: var(--cp-white); }
+  .logo__mark { width: 2.1rem; height: 2.1rem; flex: none; }
+  .logo__word {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .logo__word em { font-style: normal; font-weight: 600; }
+</style>

@@ -1,0 +1,61 @@
+---
+export interface Step { title: string; body: string; href?: string; linkLabel?: string }
+interface Props {
+  steps: Step[];
+  /** Ordered-list label for assistive tech */
+  label: string;
+  layout?: 'horizontal' | 'vertical';
+  inverse?: boolean;
+  headingLevel?: 'h2' | 'h3';
+}
+const { steps, label, layout = 'horizontal', inverse = false, headingLevel = 'h3' } = Astro.props;
+const H = headingLevel;
+---
+<ol class:list={['timeline', `timeline--${layout}`, { 'timeline--inverse': inverse }]} aria-label={label} style={`--count:${steps.length}`}>
+  {steps.map((s, i) => (
+    <li class="timeline__step" data-reveal style={`transition-delay:${i * 70}ms`}>
+      <span class="timeline__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+      <div class="timeline__body">
+        <H class="timeline__title"><span class="visually-hidden">Step {i + 1}: </span>{s.title}</H>
+        <p>{s.body}</p>
+        {s.href && <a class="text-link timeline__link" href={s.href}>{s.linkLabel ?? 'Learn more'}<span aria-hidden="true">→</span></a>}
+      </div>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .timeline { list-style: none; padding: 0; display: grid; gap: var(--space-6); position: relative; }
+  .timeline__step { position: relative; padding-left: 4.25rem; }
+  .timeline__num {
+    position: absolute; left: 0; top: 0;
+    width: 3rem; height: 3rem; display: grid; place-items: center;
+    border: 1px solid var(--cp-gold-500); border-radius: 50%;
+    font-family: var(--font-display); font-size: 1.05rem; color: var(--cp-teal-900);
+    background: var(--color-bg);
+    font-variant-numeric: lining-nums;
+  }
+  /* connecting line (vertical, all sizes for vertical; mobile for horizontal) */
+  .timeline__step:not(:last-child)::before {
+    content: ''; position: absolute; left: 1.5rem; top: 3rem; bottom: calc(-1 * var(--space-6));
+    width: 1px; background: linear-gradient(var(--cp-gold-500), var(--color-border));
+  }
+  .timeline__title { font-size: var(--step-2); margin-bottom: var(--space-2); }
+  .timeline__body p { color: var(--color-text-muted); max-width: 40ch; }
+  .timeline__link { margin-top: var(--space-3); }
+
+  @media (min-width: 960px) {
+    .timeline--horizontal { grid-template-columns: repeat(var(--count), minmax(0, 1fr)); gap: var(--space-6); }
+    .timeline--horizontal .timeline__step { padding-left: 0; padding-top: 4.5rem; }
+    .timeline--horizontal .timeline__step:not(:last-child)::before {
+      left: 3.75rem; right: calc(-1 * var(--space-6) + .75rem); top: 1.5rem; bottom: auto; width: auto; height: 1px;
+      background: linear-gradient(90deg, var(--cp-gold-500), var(--color-border));
+    }
+  }
+  .timeline--inverse .timeline__num { background: var(--cp-teal-900); color: var(--cp-white); }
+  .timeline--inverse .timeline__body p { color: var(--color-text-inverse-muted); }
+  .timeline--inverse .timeline__step:not(:last-child)::before { background: linear-gradient(var(--cp-gold-500), rgba(255,255,255,.15)); }
+  @media (min-width: 960px) {
+    .timeline--inverse.timeline--horizontal .timeline__step:not(:last-child)::before { background: linear-gradient(90deg, var(--cp-gold-500), rgba(255,255,255,.15)); }
+  }
+</style>

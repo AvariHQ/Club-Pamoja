@@ -1,0 +1,31 @@
+---
+export interface Resource { title: string; body: string; href: string; kicker?: string }
+interface Props { items: Resource[]; columns?: 2 | 3 }
+const { items, columns = 3 } = Astro.props;
+---
+<ul class="rcards" style={`--cols:${columns}`}>
+  {items.map((r) => (
+    <li class="rcard" data-reveal>
+      {r.kicker && <p class="rcard__kicker">{r.kicker}</p>}
+      <h3 class="rcard__title"><a href={r.href}>{r.title}</a></h3>
+      <p class="rcard__body">{r.body}</p>
+      <span class="rcard__arrow" aria-hidden="true">→</span>
+    </li>
+  ))}
+</ul>
+<style>
+  .rcards { list-style: none; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--color-border-strong); }
+  @media (min-width: 768px) { .rcards { grid-template-columns: repeat(2, 1fr); column-gap: var(--space-7); } }
+  @media (min-width: 1024px) { .rcards { grid-template-columns: repeat(var(--cols), 1fr); } }
+  .rcard { position: relative; padding: var(--space-5) 2.5rem var(--space-6) 0; border-bottom: 1px solid var(--color-border-strong); }
+  .rcard__kicker { font-size: var(--step--1); font-weight: 650; text-transform: uppercase; letter-spacing: var(--tracking-eyebrow); color: var(--color-accent-text); margin-bottom: var(--space-2); }
+  .rcard__title { font-size: var(--step-2); }
+  .rcard__title a { color: inherit; text-decoration: none; }
+  .rcard__title a::after { content: ''; position: absolute; inset: 0; }
+  .rcard:hover .rcard__title a { text-decoration: underline; text-decoration-color: var(--cp-gold-500); text-underline-offset: .2em; }
+  .rcard:focus-within { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+  .rcard__title a:focus-visible { outline: none; }
+  .rcard__body { margin-top: var(--space-2); color: var(--color-text-muted); }
+  .rcard__arrow { position: absolute; right: 0; top: var(--space-5); font-size: var(--step-2); color: var(--cp-gold-600); transition: transform var(--duration-fast); }
+  .rcard:hover .rcard__arrow { transform: translateX(4px); }
+</style>

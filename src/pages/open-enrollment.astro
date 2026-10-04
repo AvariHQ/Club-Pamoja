@@ -1,0 +1,47 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import ActionLink from '../components/ActionLink.astro';
+import FeeBreakdown from '../components/FeeBreakdown.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ReviewNote from '../components/ReviewNote.astro';
+import { site } from '../config/site';
+const crumbs = [{ label: 'Membership', href: '/membership/' }, { label: 'Open Enrollment', href: '/open-enrollment/' }];
+---
+<PageLayout
+  title={site.openEnrollment ? 'Open Enrollment is <em>now open.</em>' : 'Open Enrollment'}
+  metaTitle="Open Enrollment"
+  description="Club Pamoja Open Enrollment is now open. Apply directly for membership in the Kenyan diaspora mutual-aid community, without a referral."
+  eyebrow="Membership"
+  lede={site.openEnrollment
+    ? 'During Open Enrollment you can apply for Club Pamoja membership directly, without a referral from an existing member.'
+    : 'Open Enrollment is currently closed. You can still join through a referral from an existing member.'}
+  breadcrumbs={[...crumbs]}
+  heroTone="dark"
+>
+  <div class="cluster" slot="hero">
+    {site.openEnrollment ? <ActionLink action="apply" variant="gold" arrow /> : <a class="btn btn--gold" href="/how-to-join/#referral">Join by referral</a>}
+    <a class="btn btn--outline-light" href="/how-to-join/">How to join</a>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="split">
+        <div class="split__head"><p class="eyebrow">What it is</p><h2>A window to join directly.</h2></div>
+        <div class="prose">
+          <p>Club Pamoja has two membership entry paths: referral by an existing member, and direct application during Open Enrollment.</p>
+          <p>Open Enrollment is the period when the second path is available. While it is open, you do not need to know an existing member to apply.</p>
+          <ReviewNote id="CR-12">Confirm whether Open Enrollment has a published closing date. If so, add it here and in the announcement bar.</ReviewNote>
+          <h3>Why join now, before you need it</h3>
+          <p>Mutual aid is arranged in ordinary times. Joining while life is calm gives you time to register your family members and set up your records properly, before they are ever needed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--warm">
+    <div class="container">
+      <SectionHeader eyebrow="Costs" title="What it costs to join." />
+      <FeeBreakdown />
+    </div>
+  </section>
+</PageLayout>

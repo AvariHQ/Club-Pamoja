@@ -1,0 +1,65 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ProcessTimeline from '../components/ProcessTimeline.astro';
+import StorySequence from '../components/StorySequence.astro';
+import ReviewNote from '../components/ReviewNote.astro';
+import ResourceCards from '../components/ResourceCards.astro';
+import { memberJourney } from '../data/content';
+const crumbs = [{ label: 'How it works', href: '/how-it-works/' }];
+---
+<PageLayout
+  title="How Club Pamoja works"
+  description="How Club Pamoja membership works in four stages: apply, verify and activate, contribute when the community is called, and receive coordinated support when eligible."
+  eyebrow="How it works"
+  lede="Club Pamoja turns a long-standing tradition of community support into a clear, organized system: known rules, fixed amounts and professional administration."
+  breadcrumbs={crumbs}
+>
+  <section class="section">
+    <div class="container">
+      <SectionHeader eyebrow="The member journey" title="Four stages." />
+      <ProcessTimeline steps={memberJourney} label="Membership journey" />
+      <ReviewNote id="CR-04">Confirm the four-stage member journey and the wording of each stage.</ReviewNote>
+    </div>
+  </section>
+
+  <section class="section on-dark">
+    <div class="container">
+      <SectionHeader eyebrow="The principle" title="Prepared before. <em>Present</em> when it counts." lede="Every member stands with others, and others stand with them. That reciprocity is what mutual aid means." />
+      <StorySequence inverse />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="split">
+        <div class="split__head"><p class="eyebrow">Roles</p><h2>Who does what.</h2></div>
+        <dl class="roles">
+          <div><dt>Members</dt><dd>Join, keep their family and beneficiary records current, and contribute when the community is called.</dd></div>
+          <div><dt>Families</dt><dd>Notify Club Pamoja when a loss occurs and work with administration through verification.</dd></div>
+          <div><dt>Administration</dt><dd>Verifies losses, communicates with members, records contributions and administers support under the bylaws.</dd></div>
+        </dl>
+      </div>
+      <ReviewNote id="CR-14">Confirm the description of administration's role, and name the administering body if appropriate.</ReviewNote>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <SectionHeader eyebrow="Go deeper" title="Related." />
+      <ResourceCards items={[
+        { kicker: 'Family', title: 'Eligible family', body: 'Who may be registered on your membership.', href: '/coverage/' },
+        { kicker: 'Records', title: 'Beneficiaries', body: 'Why your records matter, and how to keep them current.', href: '/beneficiaries/' },
+        { kicker: 'Loss', title: 'The bereavement process', body: 'What happens, stage by stage, when a loss occurs.', href: '/bereavement-process/' },
+      ]} />
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .roles { border-top: 1px solid var(--color-border-strong); }
+  .roles > div { padding-block: var(--space-5); border-bottom: 1px solid var(--color-border-strong); display: grid; gap: var(--space-2); }
+  @media (min-width: 720px) { .roles > div { grid-template-columns: 12rem 1fr; gap: var(--space-6); } }
+  .roles dt { font-family: var(--font-display); font-size: var(--step-2); color: var(--cp-teal-900); }
+  .roles dd { color: var(--color-text-muted); }
+</style>

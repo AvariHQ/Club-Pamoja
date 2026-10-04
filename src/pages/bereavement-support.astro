@@ -1,0 +1,70 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import Callout from '../components/Callout.astro';
+import ResourceCards from '../components/ResourceCards.astro';
+import { fees, usd } from '../config/site';
+const crumbs = [{ label: 'Bereavement support', href: '/bereavement-support/' }];
+---
+<PageLayout
+  title="When loss comes, <em>you are not alone.</em>"
+  metaTitle="Bereavement Support"
+  description="How Club Pamoja's community responds when a member or eligible registered family member dies: coordinated, administered bereavement support for the Kenyan diaspora in the United States."
+  eyebrow="Bereavement support"
+  lede="Club Pamoja exists for the moment a family loses someone. The community is already organized, the amounts are already known, and the process is already defined."
+  breadcrumbs={crumbs}
+  heroTone="dark"
+>
+  <div class="cluster" slot="hero">
+    <a class="btn btn--gold" href="/contact/#report-a-loss">Report a loss</a>
+    <a class="btn btn--outline-light" href="/bereavement-process/">The bereavement process</a>
+  </div>
+
+  <section class="section">
+    <div class="container grid-2 intro">
+      <div class="prose">
+        <p class="eyebrow">If you have just lost someone</p>
+        <h2>We are sorry for your loss.</h2>
+        <p>You do not need to have everything in order before you reach out. Notify Club Pamoja administration when you are able, and we will guide your family through the next steps.</p>
+        <Callout title="First step">
+          <p><a href="/contact/#report-a-loss">Report a loss</a> to Club Pamoja administration.</p>
+        </Callout>
+      </div>
+      <ImagePlaceholder id="CP-SUPPORT-01" />
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <SectionHeader eyebrow="What the community does" title="Coordinated, not improvised." lede="Instead of a family organizing a collection in the middle of grief, the structure is already in place." />
+      <ul class="does">
+        <li><h3>Verifies</h3><p>Administration confirms the loss and the person’s eligibility.</p></li>
+        <li><h3>Communicates</h3><p>Members are informed and the contribution is called.</p></li>
+        <li><h3>Contributes</h3><p>Each member contributes {usd(fees.memberContribution)} for a member, or {usd(fees.familyContribution)} for an eligible registered family member.</p></li>
+        <li><h3>Administers</h3><p>Contributions are recorded, and support is disbursed under the bylaws.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader eyebrow="More" title="Related." />
+      <ResourceCards items={[
+        { kicker: 'Process', title: 'The bereavement process', body: 'Each stage, in order.', href: '/bereavement-process/' },
+        { kicker: 'Records', title: 'Beneficiaries', body: 'Who receives support, and keeping records current.', href: '/beneficiaries/' },
+        { kicker: 'Eligibility', title: 'Eligible family', body: 'Whose loss the community responds to.', href: '/coverage/' },
+      ]} />
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .intro { align-items: center; }
+  .does { list-style: none; padding: 0; display: grid; gap: var(--space-6); }
+  @media (min-width: 720px) { .does { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1100px) { .does { grid-template-columns: repeat(4, 1fr); } }
+  .does li { padding-top: var(--space-5); border-top: 2px solid var(--cp-gold-500); }
+  .does h3 { margin-bottom: var(--space-2); }
+  .does p { color: var(--color-text-muted); }
+</style>

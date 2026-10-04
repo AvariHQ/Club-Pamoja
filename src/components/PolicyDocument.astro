@@ -1,0 +1,29 @@
+---
+/**
+ * PolicyContent: wrapper for formal documents (bylaws, privacy, terms).
+ * When the authoritative text is not yet supplied, shows an honest EmptyState
+ * instead of drafting legal text (CRITICAL CONTENT RULE).
+ */
+import EmptyState from './EmptyState.astro';
+import ReviewNote from './ReviewNote.astro';
+interface Props { documentUrl?: string; documentLabel: string; reviewId: string; updated?: string; hasContent?: boolean }
+const { documentUrl, documentLabel, reviewId, updated, hasContent = false } = Astro.props;
+---
+<section class="section">
+  <div class="container container--prose">
+    {updated && <p class="small muted">Last updated: {updated}</p>}
+    {documentUrl && (
+      <p class="doc-link"><a class="btn btn--outline" href={documentUrl}>Read the full {documentLabel}</a></p>
+    )}
+    {hasContent ? (
+      <article class="prose"><slot /></article>
+    ) : !documentUrl && (
+      <EmptyState title={`The ${documentLabel} will be published here`} action={{ label: 'Contact Club Pamoja', href: '/contact/' }}>
+        <p>The authoritative {documentLabel} is being prepared for publication on this website. For a copy in the meantime, please contact administration.</p>
+      </EmptyState>
+    )}
+    <slot name="after" />
+    <ReviewNote id={reviewId}>Supply the authoritative {documentLabel} (final, approved text or PDF).</ReviewNote>
+  </div>
+</section>
+<style>.doc-link { margin-bottom: var(--space-6); }</style>

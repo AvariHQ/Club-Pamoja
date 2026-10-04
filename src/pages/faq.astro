@@ -1,0 +1,53 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import { faqs, faqCategories } from '../data/faq';
+const crumbs = [{ label: 'Resources', href: '/help/' }, { label: 'FAQ', href: '/faq/' }];
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+const strip = (h: string) => h.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&');
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: strip(f.a) } })),
+};
+---
+<PageLayout
+  title="Frequently asked questions"
+  metaTitle="FAQ"
+  description="Answers to common questions about Club Pamoja: mutual aid vs. insurance, how to join, fees, contributions, eligible family, beneficiaries and the member portal."
+  eyebrow="Resources"
+  lede="Straight answers to the questions people ask most."
+  breadcrumbs={crumbs}
+  schema={[faqSchema]}
+>
+  <section class="section">
+    <div class="container faq-layout">
+      <nav class="faq-toc" aria-label="FAQ topics">
+        <p class="related__title">Topics</p>
+        <ul>{faqCategories.map((c) => <li><a href={`#${slug(c)}`}>{c}</a></li>)}</ul>
+      </nav>
+      <div>
+        {faqCategories.map((c) => (
+          <section class="faq-group" aria-labelledby={slug(c)}>
+            <h2 id={slug(c)}>{c}</h2>
+            <FAQAccordion items={faqs.filter((f) => f.category === c)} />
+          </section>
+        ))}
+        <p class="faq-more">Didn’t find your answer? <a href="/contact/">Contact Club Pamoja</a>.</p>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+<style>
+  .faq-layout { display: grid; gap: var(--space-7); }
+  @media (min-width: 960px) {
+    .faq-layout { grid-template-columns: 14rem 1fr; gap: var(--space-8); }
+    .faq-toc { position: sticky; top: calc(var(--header-h) + var(--space-6)); align-self: start; }
+  }
+  .faq-toc ul { list-style: none; padding: 0; display: grid; gap: var(--space-1); }
+  .faq-toc a { display: inline-flex; min-height: 36px; align-items: center; text-decoration: none; color: var(--cp-teal-900); }
+  .faq-toc a:hover { text-decoration: underline; }
+  .faq-group + .faq-group { margin-top: var(--space-8); }
+  .faq-group h2 { font-size: var(--step-3); margin-bottom: var(--space-4); }
+  .faq-more { margin-top: var(--space-7); }
+</style>

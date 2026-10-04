@@ -1,0 +1,28 @@
+---
+/** Standard interior page: BaseLayout + PageHero + optional closing CTA. */
+import BaseLayout, { type Crumb } from './BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CTASection from '../components/CTASection.astro';
+
+interface Props {
+  title: string;
+  metaTitle?: string;
+  description: string;
+  eyebrow?: string;
+  lede?: string;
+  breadcrumbs: Crumb[];
+  heroTone?: 'light' | 'dark';
+  cta?: boolean;
+  noindex?: boolean;
+  schema?: Record<string, unknown>[];
+}
+const { title, metaTitle, description, eyebrow, lede, breadcrumbs, heroTone, cta = true, noindex, schema } = Astro.props;
+const plain = (metaTitle ?? title).replace(/<[^>]+>/g, '');
+---
+<BaseLayout title={plain} description={description} breadcrumbs={breadcrumbs} noindex={noindex} schema={schema}>
+  <PageHero title={title} eyebrow={eyebrow} lede={lede} breadcrumbs={breadcrumbs} tone={heroTone}>
+    <slot name="hero" />
+  </PageHero>
+  <slot />
+  {cta && <CTASection />}
+</BaseLayout>

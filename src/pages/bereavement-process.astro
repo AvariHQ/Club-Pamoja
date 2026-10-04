@@ -1,0 +1,39 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import ProcessTimeline from '../components/ProcessTimeline.astro';
+import Callout from '../components/Callout.astro';
+import ReviewNote from '../components/ReviewNote.astro';
+import LegalNotice from '../components/LegalNotice.astro';
+import { bereavementStages } from '../data/content';
+const crumbs = [{ label: 'Bereavement support', href: '/bereavement-support/' }, { label: 'The bereavement process', href: '/bereavement-process/' }];
+---
+<PageLayout
+  title="The bereavement process"
+  description="The Club Pamoja bereavement process, stage by stage: notification, verification, member communication, contribution, administration, and disbursement and closure."
+  eyebrow="Bereavement support"
+  lede="What happens after a death is reported to Club Pamoja, in order."
+  breadcrumbs={crumbs}
+>
+  <section class="section">
+    <div class="container grid-2">
+      <div>
+        <ProcessTimeline steps={bereavementStages} label="Bereavement process" layout="vertical" headingLevel="h2" />
+        <ReviewNote id="CR-05">Confirm stage names and descriptions, what documents verification requires, and whether any published timeframes apply. Do not add timelines until confirmed.</ReviewNote>
+      </div>
+      <aside class="side">
+        <Callout title="Reporting a loss">
+          <p>The family, or someone acting on their behalf, should notify Club Pamoja administration as soon as practical.</p>
+          <p><a class="btn btn--sm" href="/contact/#report-a-loss">Report a loss</a></p>
+        </Callout>
+        <Callout tone="obligation" title="For members">
+          <p>When a contribution is called, contribute the set amount. Your contribution is what makes support possible for the family. See <a href="/contributions-fees/#contributions">Contributions</a>.</p>
+        </Callout>
+        <LegalNotice />
+      </aside>
+    </div>
+  </section>
+</PageLayout>
+<style>
+  .side { display: grid; gap: var(--space-5); align-content: start; }
+  @media (min-width: 900px) { .side { position: sticky; top: calc(var(--header-h) + var(--space-6)); } }
+</style>

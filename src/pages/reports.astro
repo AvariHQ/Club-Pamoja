@@ -1,0 +1,43 @@
+---
+/**
+ * Reports. No reports are published until Club Pamoja supplies them (CR-16).
+ * To publish: add entries to `reports` (title, period, href to /documents/…pdf, published date).
+ */
+import PageLayout from '../layouts/PageLayout.astro';
+import EmptyState from '../components/EmptyState.astro';
+import ReviewNote from '../components/ReviewNote.astro';
+const crumbs = [{ label: 'Transparency', href: '/transparency/' }, { label: 'Reports', href: '/reports/' }];
+const reports: { title: string; period: string; href: string; published: string }[] = [];
+---
+<PageLayout
+  title="Reports"
+  metaTitle="Financial Reports"
+  description="Club Pamoja published financial reporting on contributions, fees and disbursements."
+  eyebrow="Transparency"
+  lede="Published reporting on contributions, fees and disbursements."
+  breadcrumbs={crumbs}
+  cta={false}
+>
+  <section class="section">
+    <div class="container container--narrow">
+      {reports.length ? (
+        <div class="table-wrap" role="region" aria-label="Published reports" tabindex="0">
+          <table class="table">
+            <caption>Published reports</caption>
+            <thead><tr><th scope="col">Report</th><th scope="col">Period</th><th scope="col">Published</th></tr></thead>
+            <tbody>
+              {reports.map((r) => (
+                <tr><th scope="row"><a href={r.href}>{r.title}</a></th><td>{r.period}</td><td>{r.published}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <EmptyState title="No public reports published yet" action={{ label: 'Our transparency commitment', href: '/transparency/' }}>
+          <p>Reports will be listed here when they are published. Members can contact administration with questions about contributions.</p>
+        </EmptyState>
+      )}
+      <ReviewNote id="CR-16">Supply report documents and confirm which reports are public vs. members-only (members-only reports belong in the portal).</ReviewNote>
+    </div>
+  </section>
+</PageLayout>

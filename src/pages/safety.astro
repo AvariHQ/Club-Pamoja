@@ -1,0 +1,42 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Callout from '../components/Callout.astro';
+import ReviewNote from '../components/ReviewNote.astro';
+import { actions } from '../config/site';
+const crumbs = [{ label: 'About', href: '/about/' }, { label: 'Safety & privacy', href: '/safety/' }];
+---
+<PageLayout
+  title="Safety &amp; privacy"
+  description="How Club Pamoja protects members: where member records are kept, how to recognize official communication, and how to stay safe from scams."
+  eyebrow="Safety"
+  lede="Member and family records are sensitive. Here is how Club Pamoja keeps them separate from this public website, and how to protect yourself."
+  breadcrumbs={crumbs}
+>
+  <section class="section">
+    <div class="container">
+      <div class="split">
+        <div class="split__head"><p class="eyebrow">Your records</p><h2>Kept in the member portal.</h2></div>
+        <div class="prose">
+          <p>This public website does not hold member records. Registered family members, beneficiary details and membership information are managed in the separate member portal, reached through <strong>{actions.signIn.label}</strong>.</p>
+          <p>This website does not use advertising or analytics cookies.</p>
+        </div>
+      </div>
+      <div class="split">
+        <div class="split__head"><p class="eyebrow">Stay safe</p><h2>Recognizing scams.</h2></div>
+        <div class="prose">
+          <p>Communities that support one another financially can be targeted by impostors. Protect yourself:</p>
+          <ul>
+            <li>Only sign in through the <strong>{actions.signIn.label}</strong> button on this website. Check the address in your browser before entering your password.</li>
+            <li>Never share your password or one-time codes with anyone, including someone claiming to be from Club Pamoja.</li>
+            <li>Be cautious of urgent requests for money sent through personal messages or social media. Confirm any request directly with administration.</li>
+            <li>Contribution amounts are fixed and published on the <a href="/contributions-fees/">Contributions &amp; fees</a> page. Treat any request for a different amount with suspicion.</li>
+          </ul>
+          <ReviewNote id="CR-19">Confirm official payment channels and official communication channels (email domain, phone, social accounts) so they can be listed here.</ReviewNote>
+          <Callout tone="notice" title="Something look wrong?">
+            <p>If you receive a suspicious request, do not pay. <a href="/contact/">Contact Club Pamoja administration</a>.</p>
+          </Callout>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

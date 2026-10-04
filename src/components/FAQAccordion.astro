@@ -1,0 +1,34 @@
+---
+/** Native <details>/<summary> accordion: keyboard and screen-reader accessible without JS. */
+import type { FaqItem } from '../data/faq';
+interface Props { items: FaqItem[]; headingLevel?: 'h3' | 'h4' }
+const { items, headingLevel = 'h3' } = Astro.props;
+const H = headingLevel;
+---
+<div class="faq">
+  {items.map((item) => (
+    <details class="faq__item">
+      <summary class="faq__q"><H class="faq__qtext">{item.q}</H><span class="faq__icon" aria-hidden="true"></span></summary>
+      <div class="faq__a" set:html={item.a} />
+    </details>
+  ))}
+</div>
+
+<style>
+  .faq { border-top: 1px solid var(--color-border-strong); }
+  .faq__item { border-bottom: 1px solid var(--color-border-strong); }
+  .faq__q {
+    display: flex; justify-content: space-between; align-items: center; gap: var(--space-5);
+    min-height: var(--tap); padding: var(--space-5) 0;
+    cursor: pointer; list-style: none;
+  }
+  .faq__q::-webkit-details-marker { display: none; }
+  .faq__qtext { font-family: var(--font-body); font-size: var(--step-1); font-weight: 600; line-height: 1.4; color: var(--cp-teal-900); letter-spacing: 0; }
+  .faq__q:hover .faq__qtext { text-decoration: underline; text-decoration-color: var(--cp-gold-500); text-underline-offset: .25em; }
+  .faq__icon { position: relative; flex: none; width: 1.75rem; height: 1.75rem; border: 1px solid var(--color-border-strong); border-radius: 50%; }
+  .faq__icon::before, .faq__icon::after { content: ''; position: absolute; left: 50%; top: 50%; width: 10px; height: 1.5px; background: var(--cp-teal-900); transform: translate(-50%, -50%); transition: transform var(--duration-base) var(--ease-out); }
+  .faq__icon::after { transform: translate(-50%, -50%) rotate(90deg); }
+  .faq__item[open] .faq__icon::after { transform: translate(-50%, -50%) rotate(0); }
+  .faq__a { padding: 0 3rem var(--space-6) 0; color: var(--color-text-muted); max-width: var(--measure); }
+  .faq__a :global(a) { font-weight: 550; }
+</style>

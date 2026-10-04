@@ -1,0 +1,38 @@
+---
+/**
+ * Member portal explanation. Lists ONLY capabilities stated in the brief (beneficiary records,
+ * managing membership). No invented screenshots. Review: CR-03 (portal URL + capability list).
+ */
+import ActionLink from './ActionLink.astro';
+import ImagePlaceholder from './ImagePlaceholder.astro';
+import ReviewNote from './ReviewNote.astro';
+const capabilities = [
+  'Sign in securely to your membership',
+  'Keep registered family members and beneficiary details on record',
+  'Manage your membership with Club Pamoja administration',
+];
+---
+<div class="portal">
+  <div class="portal__copy" data-reveal>
+    <p class="eyebrow">Member portal</p>
+    <h2>Your membership, kept in order.</h2>
+    <p class="lede">The public website explains Club Pamoja. Your membership itself lives in a separate, secure member portal.</p>
+    <ul class="portal__list">
+      {capabilities.map((c) => <li>{c}</li>)}
+    </ul>
+    <ReviewNote id="CR-03">Confirm the portal URL and the complete list of portal capabilities before listing more.</ReviewNote>
+    <div class="cluster">
+      <ActionLink action="signIn" />
+      <a class="text-link" href="/help/#member-portal">Help signing in</a>
+    </div>
+  </div>
+  <ImagePlaceholder id="CP-PORTAL-01" />
+</div>
+<style>
+  .portal { display: grid; gap: var(--space-7); align-items: center; }
+  @media (min-width: 960px) { .portal { grid-template-columns: 1fr 1.1fr; gap: var(--space-9); } }
+  .portal__copy > * + * { margin-top: var(--space-4); }
+  .portal__list { list-style: none; padding: 0; margin-block: var(--space-5) var(--space-6) !important; }
+  .portal__list li { position: relative; padding: var(--space-3) 0 var(--space-3) 2rem; border-bottom: var(--border); }
+  .portal__list li::before { content: ''; position: absolute; left: 0; top: 1.15rem; width: .9rem; height: .5rem; border-left: 2px solid var(--cp-gold-600); border-bottom: 2px solid var(--cp-gold-600); transform: rotate(-45deg); }
+</style>

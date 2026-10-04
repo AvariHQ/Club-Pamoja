@@ -1,0 +1,22 @@
+---
+import type { Crumb } from '../layouts/BaseLayout.astro';
+interface Props { items: Crumb[] }
+const { items } = Astro.props;
+const all = [{ label: 'Home', href: '/' }, ...items];
+---
+<nav class="crumbs" aria-label="Breadcrumb">
+  <ol>
+    {all.map((c, i) => (
+      <li>
+        {i === all.length - 1 ? <span aria-current="page">{c.label}</span> : <a href={c.href}>{c.label}</a>}
+      </li>
+    ))}
+  </ol>
+</nav>
+<style>
+  .crumbs ol { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-2); font-size: var(--step--1); }
+  .crumbs li { display: inline-flex; align-items: center; gap: var(--space-2); }
+  .crumbs li + li::before { content: '/'; color: var(--cp-gold-600); }
+  .crumbs a { color: inherit; opacity: .85; }
+  .crumbs [aria-current] { font-weight: 600; }
+</style>

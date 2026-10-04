@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Page not found" description="The page you were looking for could not be found." noindex>
+  <section class="section">
+    <div class="container container--prose nf">
+      <p class="eyebrow">Error 404</p>
+      <h1>This page could not be found.</h1>
+      <p class="lede">The link may be out of date, or the page may have moved as part of our new website.</p>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/membership/">Membership</a></li>
+        <li><a href="/contributions-fees/">Contributions &amp; fees</a></li>
+        <li><a href="/bereavement-support/">Bereavement support</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+<style>.nf > * + * { margin-top: var(--space-5); } .nf ul { padding-left: 1.2em; }</style>

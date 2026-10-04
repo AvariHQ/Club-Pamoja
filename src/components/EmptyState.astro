@@ -1,0 +1,17 @@
+---
+/** Honest empty state — used where authoritative content (reports, documents) is not yet published. */
+interface Props { title: string; action?: { label: string; href: string } }
+const { title, action } = Astro.props;
+---
+<div class="empty" role="status">
+  <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="6" width="28" height="36" rx="2" fill="none" stroke="currentColor" /><path d="M16 16h16M16 22h16M16 28h10" stroke="#C8A770" /></svg>
+  <h2 class="empty__title">{title}</h2>
+  <div class="empty__body"><slot /></div>
+  {action && <a class="btn btn--outline btn--sm" href={action.href}>{action.label}</a>}
+</div>
+<style>
+  .empty { padding: var(--space-7) var(--space-6); border: 1px dashed var(--color-border-strong); border-radius: var(--radius-md); text-align: center; background: var(--cp-white); }
+  .empty svg { width: 3rem; margin: 0 auto var(--space-4); color: var(--cp-teal-700); }
+  .empty__title { font-size: var(--step-2); }
+  .empty__body { margin: var(--space-3) auto var(--space-5); max-width: 46ch; color: var(--color-text-muted); }
+</style>

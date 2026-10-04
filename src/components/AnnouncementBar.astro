@@ -1,0 +1,37 @@
+---
+import { actions } from '../config/site';
+---
+<aside class="announce on-dark" aria-label="Announcement">
+  <div class="container container--wide announce__inner">
+    <p class="announce__text">
+      <span class="announce__dot" aria-hidden="true"></span>
+      <strong>Open Enrollment — Now Open.</strong>
+      <span class="announce__sub">Direct applications are being accepted.</span>
+    </p>
+    <a class="announce__cta" href={actions.apply.href}>{actions.apply.label}<span aria-hidden="true"> →</span></a>
+  </div>
+</aside>
+
+<style>
+  .announce {
+    background: #0a181b;
+    font-size: var(--step--1);
+    border-bottom: 1px solid var(--color-border-inverse);
+  }
+  .announce__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1) var(--space-5);
+    min-height: 2.75rem;
+    padding-block: var(--space-2);
+    text-align: center;
+  }
+  .announce__text { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0 .5em; }
+  .announce strong { letter-spacing: .08em; text-transform: uppercase; font-weight: 650; color: var(--cp-gold-500); }
+  .announce__sub { color: var(--color-text-inverse-muted); }
+  .announce__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cp-gold-500); box-shadow: 0 0 0 4px rgba(200,167,112,.18); }
+  .announce .announce__cta { color: var(--cp-white); font-weight: 650; text-underline-offset: .25em; }
+  @media (max-width: 559px) { .announce__sub { display: none; } }
+</style>

@@ -1,0 +1,32 @@
+---
+/** Interior page hero with breadcrumbs. */
+import Breadcrumbs from './Breadcrumbs.astro';
+import type { Crumb } from '../layouts/BaseLayout.astro';
+interface Props { eyebrow?: string; title: string; lede?: string; breadcrumbs: Crumb[]; tone?: 'light' | 'dark' }
+const { eyebrow, title, lede, breadcrumbs, tone = 'light' } = Astro.props;
+---
+<section class:list={['phero', { 'on-dark': tone === 'dark' }]}>
+  <div class="container">
+    <Breadcrumbs items={breadcrumbs} />
+    <div class="phero__body">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1 set:html={title} />
+      {lede && <p class="lede">{lede}</p>}
+      <slot />
+    </div>
+  </div>
+</section>
+<style>
+  .phero { padding-block: var(--space-6) var(--section-y-tight); background: var(--color-bg-alt); border-bottom: var(--border); position: relative; overflow: hidden; }
+  .phero.on-dark { background: var(--cp-teal-900); border-bottom: 0; }
+  .phero::after {
+    content: ''; position: absolute; right: -6rem; top: -4rem; width: 26rem; height: 26rem; border-radius: 50%;
+    border: 1px solid rgba(200, 167, 112, .35); pointer-events: none;
+  }
+  .phero__body { margin-top: var(--space-7); max-width: 50rem; position: relative; z-index: 1; }
+  .phero__body > * + * { margin-top: var(--space-4); }
+  .phero h1 { font-size: var(--step-5); }
+  .phero h1 :global(em) { font-style: italic; color: var(--cp-teal-700); }
+  .phero.on-dark h1 :global(em) { color: var(--cp-gold-500); }
+  .phero__body :global(.cluster) { margin-top: var(--space-6); }
+</style>

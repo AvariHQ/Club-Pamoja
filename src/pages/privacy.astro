@@ -1,0 +1,28 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PolicyDocument from '../components/PolicyDocument.astro';
+const crumbs = [{ label: 'Legal', href: '/legal/' }, { label: 'Privacy', href: '/privacy/' }];
+---
+<PageLayout
+  title="Privacy"
+  metaTitle="Privacy Policy"
+  description="How Club Pamoja handles personal information on its public website and member portal."
+  eyebrow="Legal"
+  lede="How information is handled on this public website. Member records are held separately in the member portal."
+  breadcrumbs={crumbs}
+  cta={false}
+>
+  <PolicyDocument documentLabel="privacy policy" reviewId="CR-21">
+    <div slot="after" class="prose facts">
+      <h2>About this website</h2>
+      <p>These facts describe how this public website is built:</p>
+      <ul>
+        <li>This website has no on-site forms and does not collect personal information directly.</li>
+        <li>It does not use advertising or analytics cookies.</li>
+        <li>Fonts are served from this website, not from third-party font services.</li>
+        <li>Links to the membership application and the member portal lead to separate systems, which are governed by the Club Pamoja privacy policy.</li>
+      </ul>
+    </div>
+  </PolicyDocument>
+</PageLayout>
+<style>.facts { margin-top: var(--space-7); }</style>

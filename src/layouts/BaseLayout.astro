@@ -1,0 +1,109 @@
+---
+import '@fontsource-variable/fraunces/opsz.css';
+import '@fontsource-variable/fraunces/opsz-italic.css';
+import frauncesUrl from '@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2?url';
+import publicSansUrl from '@fontsource-variable/public-sans/files/public-sans-latin-wght-normal.woff2?url';
+import '@fontsource-variable/public-sans/wght.css';
+import '../styles/global.css';
+import AnnouncementBar from '../components/AnnouncementBar.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../config/site';
+
+export interface Crumb { label: string; href: string }
+interface Props {
+  title: string;
+  description: string;
+  /** Path for canonical, e.g. "/membership/". Defaults to current path. */
+  path?: string;
+  noindex?: boolean;
+  ogType?: 'website' | 'article';
+  breadcrumbs?: Crumb[];
+  /** Extra JSON-LD objects (FAQPage, Article, …). */
+  schema?: Record<string, unknown>[];
+}
+
+const { title, description, noindex = false, ogType = 'website', breadcrumbs, schema = [] } = Astro.props;
+const path = Astro.props.path ?? Astro.url.pathname;
+const canonical = new URL(path, site.url).href;
+const fullTitle = path === '/' ? `${site.name} — Kenyan Diaspora Mutual Aid & Bereavement Support` : `${title} | ${site.name}`;
+const ogImage = new URL('/og-default.png', site.url).href;
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${site.url}/#organization`,
+  name: site.name,
+  url: site.url,
+  logo: new URL('/favicon.svg', site.url).href,
+  description: site.description,
+  areaServed: { '@type': 'Country', name: 'United States' },
+  ...(site.contactEmail ? { email: site.contactEmail } : {}),
+};
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${site.url}/#website`,
+  name: site.name,
+  url: site.url,
+  publisher: { '@id': `${site.url}/#organization` },
+  inLanguage: 'en-US',
+};
+const crumbSchema = breadcrumbs && breadcrumbs.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [{ label: 'Home', href: '/' }, ...breadcrumbs].map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: c.label,
+        item: new URL(c.href, site.url).href,
+      })),
+    }
+  : null;
+const jsonLd = [organization, website, crumbSchema, ...schema].filter(Boolean);
+---
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta name="theme-color" content="#0F2226" />
+    <link rel="preload" href={frauncesUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={publicSansUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={site.locale} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Club Pamoja — When loss comes, your community should already be in place." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    {jsonLd.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    {site.openEnrollment && <AnnouncementBar />}
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import '../scripts/reveal';
+    </script>
+  </body>
+</html>

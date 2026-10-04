@@ -1,0 +1,51 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import TransparencyPanel from '../components/TransparencyPanel.astro';
+import ResourceCards from '../components/ResourceCards.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ReviewNote from '../components/ReviewNote.astro';
+const crumbs = [{ label: 'Transparency', href: '/transparency/' }];
+---
+<PageLayout
+  title="Transparency"
+  metaTitle="Transparency & Accountability"
+  description="How Club Pamoja accounts for fees, contributions and disbursements. Fixed published amounts, written bylaws and accountable administration."
+  eyebrow="Transparency"
+  lede="Members trust one another with real money at difficult moments. That trust has to be earned with clear rules and accountable records."
+  breadcrumbs={crumbs}
+>
+  <section class="section on-dark"><div class="container"><TransparencyPanel /></div></section>
+
+  <section class="section">
+    <div class="container">
+      <div class="split">
+        <div class="split__head"><p class="eyebrow">Principles</p><h2>What transparency means here.</h2></div>
+        <dl class="principles">
+          <div><dt>Known in advance</dt><dd>Fees and contribution amounts are fixed and published on this website before anyone joins.</dd></div>
+          <div><dt>Written rules</dt><dd>Membership, contributions and support operate under the Club Pamoja bylaws.</dd></div>
+          <div><dt>Accountable records</dt><dd>Contributions and disbursements are recorded by administration.</dd></div>
+          <div><dt>Clear status</dt><dd>Club Pamoja describes itself honestly: mutual aid, not insurance.</dd></div>
+        </dl>
+      </div>
+      <ReviewNote id="CR-08">Confirm what is reported to members (per-campaign summaries? annual statements? audit/review?) and how often, before expanding this page.</ReviewNote>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <SectionHeader eyebrow="Accountability" title="Go further." />
+      <ResourceCards items={[
+        { kicker: 'Reports', title: 'Reports', body: 'Published financial reporting.', href: '/reports/' },
+        { kicker: 'Governance', title: 'Governance', body: 'How Club Pamoja is governed.', href: '/governance/' },
+        { kicker: 'Rules', title: 'Contributions & fees', body: 'Every amount, and when it applies.', href: '/contributions-fees/' },
+      ]} />
+    </div>
+  </section>
+</PageLayout>
+<style>
+  .principles { border-top: 1px solid var(--color-border-strong); }
+  .principles > div { padding-block: var(--space-5); border-bottom: 1px solid var(--color-border-strong); display: grid; gap: var(--space-2); }
+  @media (min-width: 720px) { .principles > div { grid-template-columns: 14rem 1fr; gap: var(--space-6); } }
+  .principles dt { font-family: var(--font-display); font-size: var(--step-1); color: var(--cp-teal-900); }
+  .principles dd { color: var(--color-text-muted); }
+</style>

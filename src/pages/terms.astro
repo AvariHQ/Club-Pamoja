@@ -1,0 +1,16 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PolicyDocument from '../components/PolicyDocument.astro';
+const crumbs = [{ label: 'Legal', href: '/legal/' }, { label: 'Terms', href: '/terms/' }];
+---
+<PageLayout
+  title="Terms of use"
+  metaTitle="Terms of Use"
+  description="Terms of use for the Club Pamoja public website."
+  eyebrow="Legal"
+  lede="Terms for using this public website. Membership itself is governed by the Club Pamoja bylaws."
+  breadcrumbs={crumbs}
+  cta={false}
+>
+  <PolicyDocument documentLabel="terms of use" reviewId="CR-22" />
+</PageLayout>

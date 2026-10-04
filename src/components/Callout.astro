@@ -1,0 +1,17 @@
+---
+/** Callout — highlights an important note. `tone="obligation"` is for member obligations that must not be hidden. */
+interface Props { title?: string; tone?: 'info' | 'obligation' | 'notice' }
+const { title, tone = 'info' } = Astro.props;
+---
+<aside class:list={['callout', `callout--${tone}`]} aria-label={title ?? 'Note'}>
+  {title && <p class="callout__title">{title}</p>}
+  <div class="callout__body"><slot /></div>
+</aside>
+<style>
+  .callout { padding: var(--space-4) var(--space-5); border-left: 3px solid var(--cp-gold-500); background: var(--color-bg-alt); border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+  .callout--obligation { border-left-color: var(--cp-teal-900); background: var(--cp-teal-100); }
+  .callout--notice { border-left-color: var(--color-warning-border); background: var(--color-warning-bg); }
+  .callout__title { font-weight: 700; color: var(--cp-teal-900); margin-bottom: var(--space-2); }
+  .callout__body > :global(* + *) { margin-top: var(--space-3); }
+  .callout__body :global(ul) { padding-left: 1.2em; }
+</style>

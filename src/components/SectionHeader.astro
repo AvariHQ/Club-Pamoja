@@ -1,0 +1,28 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lede?: string;
+  align?: 'left' | 'center';
+  level?: 'h1' | 'h2';
+  id?: string;
+}
+const { eyebrow, title, lede, align = 'left', level = 'h2', id } = Astro.props;
+const Tag = level;
+---
+<header class:list={['sh', `sh--${align}`]} data-reveal>
+  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+  <Tag id={id} set:html={title} />
+  {lede && <p class="lede">{lede}</p>}
+  <slot />
+</header>
+
+<style>
+  .sh { max-width: 48rem; margin-bottom: var(--space-7); }
+  .sh > * + * { margin-top: var(--space-4); }
+  .sh--center { margin-inline: auto; text-align: center; }
+  .sh--center .eyebrow { justify-content: center; }
+  .sh--center .lede { margin-inline: auto; }
+  .sh :global(em) { font-style: italic; color: var(--cp-teal-700); }
+  :global(.on-dark) .sh :global(em) { color: var(--cp-gold-500); }
+</style>

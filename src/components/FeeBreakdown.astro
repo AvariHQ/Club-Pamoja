@@ -1,0 +1,66 @@
+---
+/** Verified fee and contribution amounts. Joining costs vs. community contributions are deliberately separated. */
+import { fees, usd } from '../config/site';
+interface Props { detailed?: boolean; headingLevel?: 'h2' | 'h3' }
+const { detailed = false, headingLevel = 'h3' } = Astro.props;
+const H = headingLevel;
+---
+<div class="fees">
+  <section class="fees__group" aria-labelledby="fees-join">
+    <H id="fees-join" class="fees__heading">To join</H>
+    <p class="fees__intro">Paid once, when you become a member.</p>
+    <dl class="fees__list">
+      <div class="fee">
+        <dt>Application fee</dt>
+        <dd class="fee__amt">{usd(fees.application)}</dd>
+        {detailed && <dd class="fee__note">Paid when you submit your membership application.</dd>}
+      </div>
+      <div class="fee">
+        <dt>Activation fee <span class="fee__tag">One-time</span></dt>
+        <dd class="fee__amt">{usd(fees.activation)}</dd>
+        {detailed && <dd class="fee__note">Paid once to activate your membership.</dd>}
+      </div>
+    </dl>
+  </section>
+
+  <section class="fees__group fees__group--called" aria-labelledby="fees-called">
+    <H id="fees-called" class="fees__heading">When the community is called to contribute</H>
+    <p class="fees__intro">Contributions are called following a death, as set out in the <a href="/contributions-fees/">contribution rules</a>.</p>
+    <dl class="fees__list">
+      <div class="fee">
+        <dt>Following the death of a member</dt>
+        <dd class="fee__amt">{usd(fees.memberContribution)}</dd>
+      </div>
+      <div class="fee">
+        <dt>Following the death of an eligible registered family member</dt>
+        <dd class="fee__amt">{usd(fees.familyContribution)}</dd>
+      </div>
+    </dl>
+  </section>
+</div>
+
+<style>
+  .fees { display: grid; gap: var(--space-5); }
+  @media (min-width: 900px) { .fees { grid-template-columns: 1fr 1.25fr; } }
+  .fees__group { padding: var(--space-6); border: var(--border); border-radius: var(--radius-md); background: var(--cp-white); }
+  .fees__group--called { background: var(--cp-teal-900); color: var(--cp-white); border-color: var(--cp-teal-900); }
+  .fees__heading { font-size: var(--step-2); }
+  .fees__group--called .fees__heading { color: var(--cp-white); }
+  .fees__intro { margin-top: var(--space-2); color: var(--color-text-muted); font-size: .9375rem; }
+  .fees__group--called .fees__intro { color: var(--color-text-inverse-muted); }
+  .fees__group--called a { color: var(--cp-white); }
+  .fees__list { margin-top: var(--space-5); }
+  .fee {
+    display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: var(--space-1) var(--space-4);
+    padding-block: var(--space-4); border-top: var(--border);
+  }
+  .fees__group--called .fee { border-top-color: var(--color-border-inverse); }
+  .fee dt { font-weight: 550; }
+  .fee__amt {
+    font-family: var(--font-display); font-size: var(--step-4); line-height: 1; color: var(--cp-teal-900);
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  .fees__group--called .fee__amt { color: var(--cp-gold-500); }
+  .fee__note { grid-column: 1 / -1; font-size: var(--step--1); color: var(--color-text-muted); }
+  .fee__tag { display: inline-block; margin-left: .4em; padding: 0 .5em; border: 1px solid var(--cp-gold-600); border-radius: var(--radius-pill); font-size: 11px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; color: var(--color-accent-text); vertical-align: 2px; }
+</style>

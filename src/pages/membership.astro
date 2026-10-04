@@ -1,0 +1,109 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import ActionLink from '../components/ActionLink.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import FeeBreakdown from '../components/FeeBreakdown.astro';
+import Callout from '../components/Callout.astro';
+import LegalNotice from '../components/LegalNotice.astro';
+import ResourceCards from '../components/ResourceCards.astro';
+import ReviewNote from '../components/ReviewNote.astro';
+import StorySequence from '../components/StorySequence.astro';
+import { membershipFunctions } from '../data/content';
+import { fees, usd } from '../config/site';
+const crumbs = [{ label: 'Membership', href: '/membership/' }];
+---
+<PageLayout
+  title="Membership is a <em>commitment</em> to one another."
+  metaTitle="Membership"
+  description="What Club Pamoja membership means: an organized mutual-aid community for the Kenyan diaspora in the United States, with fixed fees, known contributions and shared responsibilities."
+  eyebrow="Membership"
+  lede="A Club Pamoja member joins a community that has agreed, in advance, to stand with each other's families when a death occurs."
+  breadcrumbs={crumbs}
+>
+  <div class="cluster" slot="hero">
+    <ActionLink action="apply" arrow />
+    <a class="btn btn--outline" href="/how-to-join/">How to join</a>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="split">
+        <div class="split__head"><p class="eyebrow">The idea</p><h2>Mutual aid, organized properly.</h2></div>
+        <div class="prose">
+          <p>Club Pamoja is a mutual-aid community. Members do not buy coverage from a company. They agree to support one another. When a member or an eligible registered family member dies, every member is called to contribute a set amount, and that support is administered for the family.</p>
+          <p>What makes Club Pamoja different from an informal collection is structure: written bylaws, fixed amounts known in advance, records kept before they are needed, and professional administration.</p>
+          <Callout title="Mutual aid. Not insurance.">
+            <p>Club Pamoja is not an insurance company. Membership is not an insurance policy, contributions are not premiums, and support is not an insurance benefit. See <a href="/legal/">Legal</a>.</p>
+          </Callout>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <SectionHeader eyebrow="How mutual aid works" title="A circle, not a transaction." />
+      <StorySequence />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="split">
+        <div class="split__head"><p class="eyebrow">What you join</p><h2>What membership connects you to.</h2></div>
+        <dl class="defs">
+          {membershipFunctions.map((f) => (<div><dt>{f.title}</dt><dd>{f.body}</dd></div>))}
+        </dl>
+      </div>
+      <ReviewNote id="CR-06">Confirm each function listed is accurate and complete.</ReviewNote>
+    </div>
+  </section>
+
+  <section class="section section--warm" id="costs">
+    <div class="container">
+      <SectionHeader eyebrow="Costs" title="What membership costs." lede="Two one-off payments to join, and set contributions when the community is called." />
+      <FeeBreakdown />
+      <p class="related"><a class="text-link" href="/contributions-fees/">Contributions &amp; fees in full <span aria-hidden="true">→</span></a></p>
+    </div>
+  </section>
+
+  <section class="section" id="responsibilities">
+    <div class="container">
+      <div class="split">
+        <div class="split__head"><p class="eyebrow">Responsibilities</p><h2>What members commit to.</h2></div>
+        <div class="prose">
+          <p>Mutual aid only works when every member does their part. Before you apply, understand these commitments:</p>
+          <Callout tone="obligation" title="Member responsibilities">
+            <ul>
+              <li>Pay the {usd(fees.application)} application fee and the one-time {usd(fees.activation)} activation fee.</li>
+              <li>Contribute when the community is called: {usd(fees.memberContribution)} following the death of a member, and {usd(fees.familyContribution)} following the death of an eligible registered family member.</li>
+              <li>Keep your registered family members and beneficiary details accurate in the member portal.</li>
+              <li>Follow the Club Pamoja bylaws.</li>
+            </ul>
+          </Callout>
+          <ReviewNote id="CR-10">Add contribution deadlines, consequences of non-payment, and any reinstatement rules exactly as stated in the bylaws.</ReviewNote>
+          <LegalNotice />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <SectionHeader eyebrow="Next" title="Continue." />
+      <ResourceCards items={[
+        { kicker: 'Joining', title: 'How to join', body: 'Referral or direct application during Open Enrollment.', href: '/how-to-join/' },
+        { kicker: 'Family', title: 'Eligible family', body: 'Who may be registered on your membership.', href: '/coverage/' },
+        { kicker: 'Process', title: 'How it works', body: 'The four stages of the member journey.', href: '/how-it-works/' },
+      ]} />
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .defs { display: grid; gap: 0; border-top: 1px solid var(--color-border-strong); }
+  .defs > div { display: grid; gap: var(--space-2); padding-block: var(--space-5); border-bottom: 1px solid var(--color-border-strong); }
+  @media (min-width: 720px) { .defs > div { grid-template-columns: 14rem 1fr; gap: var(--space-6); } }
+  .defs dt { font-family: var(--font-display); font-size: var(--step-1); color: var(--cp-teal-900); }
+  .defs dd { color: var(--color-text-muted); }
+</style>

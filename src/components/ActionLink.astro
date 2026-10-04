@@ -1,0 +1,30 @@
+---
+/** Renders one of the two canonical site actions with consistent label and destination. */
+import { actions } from '../config/site';
+
+interface Props {
+  action: 'apply' | 'signIn';
+  variant?: 'primary' | 'gold' | 'outline' | 'outline-light' | 'link';
+  size?: 'sm' | 'md';
+  class?: string;
+  arrow?: boolean;
+}
+const { action, variant = 'primary', size = 'md', arrow = false, class: cls = '' } = Astro.props;
+const a = actions[action];
+const classes = [
+  variant === 'link' ? 'text-link' : 'btn',
+  variant === 'gold' && 'btn--gold',
+  variant === 'outline' && 'btn--outline',
+  variant === 'outline-light' && 'btn--outline-light',
+  size === 'sm' && variant !== 'link' && 'btn--sm',
+  cls,
+].filter(Boolean).join(' ');
+---
+<a
+  class={classes}
+  href={a.href}
+  data-action={action}
+  {...(a.external ? { rel: 'noopener' } : {})}
+>
+  {a.label}{arrow && <span class="arrow" aria-hidden="true">→</span>}
+</a>

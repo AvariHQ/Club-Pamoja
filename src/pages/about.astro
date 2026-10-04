@@ -1,0 +1,44 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ReviewNote from '../components/ReviewNote.astro';
+import TrustPanel from '../components/TrustPanel.astro';
+const crumbs = [{ label: 'About', href: '/about/' }];
+---
+<PageLayout
+  title="Pamoja means <em>together.</em>"
+  metaTitle="About Club Pamoja"
+  description="About Club Pamoja: a professionally administered mutual-aid community for the Kenyan diaspora in the United States, built so that no family faces loss alone."
+  eyebrow="About Club Pamoja"
+  lede="Club Pamoja is a mutual-aid community for the Kenyan diaspora in the United States, organized so that when loss comes, the community is already in place."
+  breadcrumbs={crumbs}
+>
+  <section class="section">
+    <div class="container">
+      <ImagePlaceholder id="CP-ABOUT-01" eager />
+    </div>
+  </section>
+  <section class="section section--tight">
+    <div class="container">
+      <div class="split">
+        <div class="split__head"><p class="eyebrow">Why we exist</p><h2>Far from home, still together.</h2></div>
+        <div class="prose">
+          <p class="big">At home, when a family loses someone, the community gathers. Relatives, neighbours and friends arrive, contribute, and share the weight.</p>
+          <p>For Kenyans living in the United States, that circle is often spread across cities and states. When a death occurs, families can find themselves organizing support from scratch, at the worst possible moment.</p>
+          <p>Club Pamoja exists to change that. It keeps the spirit of community support and adds what a dispersed community needs: written rules, fixed contributions known in advance, accurate records, and professional administration.</p>
+          <ReviewNote id="CR-18">Add verified founding story: year founded, founders (with consent), legal form/registration, and states served.</ReviewNote>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section section--alt">
+    <div class="container">
+      <SectionHeader eyebrow="What we stand for" title="Belonging, preparedness, dignity." />
+      <TrustPanel />
+    </div>
+  </section>
+</PageLayout>
+<style>
+  .big { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.4; color: var(--cp-teal-900); }
+</style>

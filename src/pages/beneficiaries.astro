@@ -1,0 +1,42 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import ActionLink from '../components/ActionLink.astro';
+import Callout from '../components/Callout.astro';
+import ReviewNote from '../components/ReviewNote.astro';
+import LegalNotice from '../components/LegalNotice.astro';
+const crumbs = [{ label: 'How it works', href: '/how-it-works/' }, { label: 'Beneficiaries', href: '/beneficiaries/' }];
+---
+<PageLayout
+  title="Beneficiaries"
+  metaTitle="Beneficiary Records"
+  description="Why Club Pamoja members keep beneficiary records and registered family details current, and where to update them."
+  eyebrow="Records"
+  lede="The best time to record who should receive support is long before it is needed. Accurate records let administration act promptly for your family."
+  breadcrumbs={crumbs}
+>
+  <div class="cluster" slot="hero"><ActionLink action="signIn" /></div>
+
+  <section class="section">
+    <div class="container">
+      <div class="split">
+        <div class="split__head"><p class="eyebrow">Why it matters</p><h2>Records, kept in calm times.</h2></div>
+        <div class="prose">
+          <p>Support following a loss is administered according to the records held for your membership. If those records are out of date, the people you intended to support may face delays at the hardest possible moment.</p>
+          <h3>Keep these current</h3>
+          <ul>
+            <li>Your beneficiary details</li>
+            <li>Your registered family members</li>
+            <li>Your own contact details</li>
+          </ul>
+          <h3>When to review them</h3>
+          <p>Review your records after any major life change, such as a marriage, a birth, a death in the family, or a move.</p>
+          <Callout tone="obligation" title="Where to update">
+            <p>Beneficiary and family records are managed in the secure member portal, not on this website. Use <strong>Member Sign In</strong> at the top of any page.</p>
+          </Callout>
+          <ReviewNote id="CR-15">Confirm: who can be named as a beneficiary, how many, whether changes need verification, and how support is disbursed if no beneficiary is recorded.</ReviewNote>
+          <LegalNotice />
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

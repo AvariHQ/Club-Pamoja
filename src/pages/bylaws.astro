@@ -1,0 +1,17 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PolicyDocument from '../components/PolicyDocument.astro';
+import { site } from '../config/site';
+const crumbs = [{ label: 'Legal', href: '/legal/' }, { label: 'Bylaws', href: '/bylaws/' }];
+---
+<PageLayout
+  title="Bylaws"
+  metaTitle="Club Pamoja Bylaws"
+  description="The Club Pamoja bylaws: the authoritative governing document for membership, eligibility, contributions and bereavement support."
+  eyebrow="Legal"
+  lede="The bylaws are the authoritative governing document of Club Pamoja. Summaries elsewhere on this website are for readability only. Where they differ, the bylaws govern."
+  breadcrumbs={crumbs}
+  cta={false}
+>
+  <PolicyDocument documentLabel="Club Pamoja bylaws" documentUrl={site.bylawsUrl || undefined} reviewId="CR-01" />
+</PageLayout>

@@ -1,0 +1,34 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+const crumbs = [{ label: 'Legal', href: '/legal/' }, { label: 'Accessibility', href: '/accessibility/' }];
+---
+<PageLayout
+  title="Accessibility"
+  metaTitle="Accessibility Statement"
+  description="Club Pamoja's commitment to an accessible website, the standard we work toward, and how to report a barrier."
+  eyebrow="Legal"
+  lede="Club Pamoja wants everyone in our community to be able to use this website."
+  breadcrumbs={crumbs}
+  cta={false}
+>
+  <section class="section">
+    <div class="container container--prose prose">
+      <h2>Our standard</h2>
+      <p>This website is designed and built to follow the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA.</p>
+      <h2>What we have done</h2>
+      <ul>
+        <li>Semantic structure with landmarks and an ordered heading hierarchy</li>
+        <li>Full keyboard navigation, including menus and question lists, with visible focus indicators</li>
+        <li>A “Skip to main content” link on every page</li>
+        <li>Text and interface colours chosen to meet AA contrast ratios</li>
+        <li>Respect for your device’s reduced-motion setting</li>
+        <li>Text alternatives for meaningful images</li>
+        <li>Layouts that reflow at 400% zoom without horizontal scrolling</li>
+      </ul>
+      <h2>Known limitations</h2>
+      <p>The membership application and member portal are separate systems and may differ in accessibility from this website.</p>
+      <h2>Report a barrier</h2>
+      <p>If something on this website is hard to use, please <a href="/contact/">contact us</a> and tell us the page and what happened. We will do our best to provide the information in another way.</p>
+    </div>
+  </section>
+</PageLayout>

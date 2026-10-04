@@ -1,0 +1,66 @@
+---
+/**
+ * Contact. No on-site form: messages would need a real backend and a privacy review (CR-20).
+ * Contact is by email from PUBLIC_CONTACT_EMAIL until a verified channel/form handler exists.
+ */
+import PageLayout from '../layouts/PageLayout.astro';
+import Callout from '../components/Callout.astro';
+import ReviewNote from '../components/ReviewNote.astro';
+import { site, actions } from '../config/site';
+const crumbs = [{ label: 'About', href: '/about/' }, { label: 'Contact', href: '/contact/' }];
+const email = site.contactEmail;
+---
+<PageLayout
+  title="Contact Club Pamoja"
+  metaTitle="Contact"
+  description="Contact Club Pamoja administration about membership, contributions or the member portal, or to report the death of a member or eligible registered family member."
+  eyebrow="Contact"
+  lede="Reach Club Pamoja administration about membership, contributions, the member portal, or to report a loss."
+  breadcrumbs={crumbs}
+  cta={false}
+>
+  <section class="section">
+    <div class="container contact">
+      <div class="contact__card" id="report-a-loss">
+        <p class="eyebrow">Report a loss</p>
+        <h2>If someone has died</h2>
+        <p>We are sorry for your loss. Please notify administration as soon as you are able, with:</p>
+        <ul>
+          <li>The member’s name</li>
+          <li>The name of the person who has died, and their relationship to the member</li>
+          <li>The best way to reach you</li>
+        </ul>
+        <ReviewNote id="CR-05">Confirm the official loss-reporting channel and what information/documents are needed at notification.</ReviewNote>
+        {email
+          ? <a class="btn" href={`mailto:${email}?subject=${encodeURIComponent('Reporting a loss')}`}>Email administration</a>
+          : <p class="muted">The direct channel for reporting a loss will be published here.</p>}
+        <p class="small muted"><a href="/bereavement-process/">What happens next</a></p>
+      </div>
+
+      <div class="contact__card contact__card--plain">
+        <p class="eyebrow">General enquiries</p>
+        <h2>Membership and other questions</h2>
+        {email ? (
+          <p>Email <a href={`mailto:${email}`}>{email}</a>.</p>
+        ) : (
+          <p>Contact details for administration will be published here.</p>
+        )}
+        <ReviewNote id="CR-20">Provide official contact email, phone (if any), mailing address (if public) and response-time expectations. Set PUBLIC_CONTACT_EMAIL.</ReviewNote>
+        <h3>Members</h3>
+        <p>For questions about your account, records or contributions, sign in to the member portal.</p>
+        <a class="btn btn--outline" href={actions.signIn.href}>{actions.signIn.label}</a>
+        <Callout tone="notice" title="Never send passwords or payment details by email">
+          <p>Club Pamoja administration will never ask for your password. See <a href="/safety/">Safety &amp; privacy</a>.</p>
+        </Callout>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+<style>
+  .contact { display: grid; gap: var(--space-5); }
+  @media (min-width: 900px) { .contact { grid-template-columns: 1fr 1fr; } }
+  .contact__card { padding: var(--space-7) var(--space-6); border-radius: var(--radius-lg); background: var(--cp-teal-100); border: 1px solid var(--cp-teal-200); display: flex; flex-direction: column; gap: var(--space-4); align-items: flex-start; }
+  .contact__card--plain { background: var(--cp-white); border-color: var(--color-border-strong); }
+  .contact__card h2 { font-size: var(--step-3); }
+  .contact__card ul { padding-left: 1.2em; }
+</style>

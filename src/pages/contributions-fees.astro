@@ -1,0 +1,82 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import FeeBreakdown from '../components/FeeBreakdown.astro';
+import Callout from '../components/Callout.astro';
+import LegalNotice from '../components/LegalNotice.astro';
+import ReviewNote from '../components/ReviewNote.astro';
+import { fees, usd } from '../config/site';
+const crumbs = [{ label: 'Membership', href: '/membership/' }, { label: 'Contributions & fees', href: '/contributions-fees/' }];
+---
+<PageLayout
+  title="Contributions &amp; fees"
+  description="Club Pamoja fees and contributions: $20 application fee, $60 one-time activation fee, $90 contribution following the death of a member, and $30 following the death of an eligible registered family member."
+  eyebrow="Membership"
+  lede="Every amount is fixed and published in advance. There are two one-off fees to join, and two set contribution amounts when the community is called."
+  breadcrumbs={crumbs}
+>
+  <section class="section">
+    <div class="container">
+      <FeeBreakdown detailed headingLevel="h2" />
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="split">
+        <div class="split__head"><p class="eyebrow">Summary</p><h2>All amounts at a glance.</h2></div>
+        <div>
+          <div class="table-wrap" role="region" aria-label="Fees and contributions table" tabindex="0">
+            <table class="table">
+              <caption>Club Pamoja fees and contributions (USD)</caption>
+              <thead><tr><th scope="col">Item</th><th scope="col">When</th><th scope="col">Amount</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Application fee</th><td>When you apply</td><td class="num">{usd(fees.application)}</td></tr>
+                <tr><th scope="row">Activation fee</th><td>Once, to activate membership</td><td class="num">{usd(fees.activation)}</td></tr>
+                <tr><th scope="row">Member bereavement contribution</th><td>Following the death of a member</td><td class="num">{usd(fees.memberContribution)}</td></tr>
+                <tr><th scope="row">Family bereavement contribution</th><td>Following the death of an eligible registered family member</td><td class="num">{usd(fees.familyContribution)}</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contributions">
+    <div class="container">
+      <div class="split">
+        <div class="split__head"><p class="eyebrow">Contributions</p><h2>When the community is called.</h2></div>
+        <div class="prose">
+          <p>A contribution is each member’s share in supporting a member family after a death. It is called following a death.</p>
+          <ul>
+            <li>Following the death of a <strong>member</strong>, each member is called to contribute <strong>{usd(fees.memberContribution)}</strong>.</li>
+            <li>Following the death of an <strong>eligible registered family member</strong>, each member is called to contribute <strong>{usd(fees.familyContribution)}</strong>.</li>
+          </ul>
+          <Callout title="Contributions are not premiums">
+            <p>Club Pamoja is mutual aid, not insurance. A contribution does not buy coverage. It is your part in a shared commitment among members.</p>
+          </Callout>
+          <h3>How you are notified and how you pay</h3>
+          <p>Members are informed when a contribution is called.</p>
+          <ReviewNote id="CR-10">Add: how members are notified, payment methods, the deadline to contribute, and what happens if a contribution is missed, all from the bylaws.</ReviewNote>
+          <Callout tone="obligation" title="Your obligation">
+            <p>Contributing when called is a condition of membership. Specific deadlines and the consequences of non-payment are set out in the <a href="/bylaws/">bylaws</a>.</p>
+          </Callout>
+          <LegalNotice />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="fees">
+    <div class="container">
+      <div class="split">
+        <div class="split__head"><p class="eyebrow">Joining fees</p><h2>Application and activation.</h2></div>
+        <div class="prose">
+          <p>The <strong>{usd(fees.application)} application fee</strong> is paid when you apply. The <strong>{usd(fees.activation)} activation fee</strong> is paid once, to activate your membership.</p>
+          <ReviewNote id="CR-13">Confirm whether either fee is refundable (e.g. if an application is not approved), and what each fee funds.</ReviewNote>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

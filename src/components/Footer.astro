@@ -1,0 +1,66 @@
+---
+import Logo from './Logo.astro';
+import ActionLink from './ActionLink.astro';
+import { footerNav, legalNav } from '../config/navigation';
+import { site } from '../config/site';
+const year = new Date().getFullYear();
+---
+<footer class="footer on-dark">
+  <div class="container container--wide">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="/" aria-label="Club Pamoja home" class="footer__logo"><Logo inverse /></a>
+        <p class="footer__tag">{site.tagline}</p>
+        <div class="cluster">
+          <ActionLink action="apply" variant="gold" size="sm" />
+          <ActionLink action="signIn" variant="outline-light" size="sm" />
+        </div>
+      </div>
+      <nav class="footer__nav" aria-label="Footer">
+        {footerNav.map((col) => (
+          <div>
+            <h2 class="footer__heading">{col.heading}</h2>
+            <ul>
+              {col.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+            </ul>
+          </div>
+        ))}
+      </nav>
+    </div>
+
+    <div class="footer__disclosure">
+      <p>
+        <strong>Club Pamoja is a mutual-aid community, not an insurance company.</strong>
+        Membership is not an insurance policy, and contributions are not insurance premiums.
+        Support is provided by members to members under the Club Pamoja <a href="/bylaws/">bylaws</a> and
+        <a href="/contributions-fees/">contribution rules</a>.
+      </p>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© {year} Club Pamoja. All rights reserved.</p>
+      <ul class="footer__legal" aria-label="Legal">
+        {legalNav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { padding-block: var(--space-8) var(--space-6); font-size: .9375rem; }
+  .footer__top { display: grid; gap: var(--space-7); }
+  @media (min-width: 1024px) { .footer__top { grid-template-columns: 1.1fr 2fr; gap: var(--space-8); } }
+  .footer__logo { text-decoration: none; display: inline-block; }
+  .footer__tag { margin: var(--space-4) 0 var(--space-5); font-family: var(--font-display); font-size: var(--step-2); line-height: 1.25; max-width: 22ch; color: var(--cp-white); }
+  .footer__nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); }
+  @media (min-width: 720px) { .footer__nav { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .footer__heading { font-family: var(--font-body); font-size: var(--step--1); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--cp-gold-500) !important; font-weight: 650; margin-bottom: var(--space-3); }
+  .footer ul { list-style: none; padding: 0; }
+  .footer__nav li + li { margin-top: var(--space-1); }
+  .footer__nav a, .footer__legal a { display: inline-flex; min-height: 32px; align-items: center; color: var(--color-text-inverse-muted) !important; text-decoration: none; }
+  .footer__nav a:hover, .footer__legal a:hover { color: var(--cp-white) !important; text-decoration: underline; }
+  .footer__disclosure { margin-top: var(--space-7); padding: var(--space-5) 0; border-top: 1px solid var(--color-border-inverse); color: var(--color-text-inverse-muted); max-width: 60rem; }
+  .footer__disclosure strong { color: var(--cp-white); }
+  .footer__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-3); padding-top: var(--space-5); border-top: 1px solid var(--color-border-inverse); color: var(--color-text-inverse-muted); font-size: var(--step--1); }
+  .footer__legal { display: flex; flex-wrap: wrap; gap: 0 var(--space-5); }
+</style>

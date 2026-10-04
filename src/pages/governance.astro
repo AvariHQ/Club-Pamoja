@@ -1,0 +1,41 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import ReviewNote from '../components/ReviewNote.astro';
+import Callout from '../components/Callout.astro';
+import ResourceCards from '../components/ResourceCards.astro';
+const crumbs = [{ label: 'Transparency', href: '/transparency/' }, { label: 'Governance', href: '/governance/' }];
+---
+<PageLayout
+  title="Governance"
+  description="How Club Pamoja is governed: written bylaws, professional administration, and clear rules for membership, contributions and bereavement support."
+  eyebrow="Transparency"
+  lede="Club Pamoja operates under written bylaws and professional administration, not informal arrangement."
+  breadcrumbs={crumbs}
+>
+  <section class="section">
+    <div class="container">
+      <div class="split">
+        <div class="split__head"><p class="eyebrow">Framework</p><h2>Rules first.</h2></div>
+        <div class="prose">
+          <p>The <a href="/bylaws/">Club Pamoja bylaws</a> are the governing document. They set out membership, eligibility, contributions, and how bereavement support is administered.</p>
+          <p>This website summarizes those rules in plain language. Where a summary and the bylaws differ, the bylaws govern.</p>
+          <h3>Leadership and administration</h3>
+          <p>Club Pamoja is professionally administered.</p>
+          <ReviewNote id="CR-17">Supply: governing body structure (board/committee), officer roles, how leaders are chosen, how bylaws are amended, and how members raise concerns. Do not publish names without consent.</ReviewNote>
+          <Callout title="Questions about governance?">
+            <p><a href="/contact/">Contact Club Pamoja administration.</a></p>
+          </Callout>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section section--alt">
+    <div class="container">
+      <ResourceCards items={[
+        { title: 'Bylaws', body: 'The authoritative governing document.', href: '/bylaws/' },
+        { title: 'Transparency', body: 'How funds are accounted for.', href: '/transparency/' },
+        { title: 'Legal', body: 'Mutual-aid status and policies.', href: '/legal/' },
+      ]} />
+    </div>
+  </section>
+</PageLayout>

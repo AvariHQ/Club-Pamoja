@@ -1,0 +1,38 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import CoverageGrid from '../components/CoverageGrid.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import Callout from '../components/Callout.astro';
+import LegalNotice from '../components/LegalNotice.astro';
+const crumbs = [{ label: 'How it works', href: '/how-it-works/' }, { label: 'Eligible family', href: '/coverage/' }];
+---
+<PageLayout
+  title="Eligible family"
+  metaTitle="Eligible Family Members"
+  description="Who can be registered on a Club Pamoja membership, and the contribution called following the death of a member or an eligible registered family member."
+  eyebrow="Who can be registered"
+  lede="Your membership includes you and the eligible family members you register. Eligibility is defined in the Club Pamoja bylaws."
+  breadcrumbs={crumbs}
+>
+  <section class="section">
+    <div class="container grid-2">
+      <div>
+        <CoverageGrid />
+      </div>
+      <div class="prose">
+        <h2>How it works</h2>
+        <p>Members register their eligible family members. Only family members who are <strong>eligible and registered</strong> on your membership are included.</p>
+        <p>When a member dies, members are called to contribute at the member rate. When an eligible registered family member dies, members are called to contribute at the family-member rate.</p>
+        <Callout tone="obligation" title="Register before you need to">
+          <p>Make sure each eligible family member is registered on your membership and that their details are accurate. Records are kept in the member portal.</p>
+        </Callout>
+        <LegalNotice />
+      </div>
+    </div>
+  </section>
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <ImagePlaceholder id="CP-FAMILY-01" />
+    </div>
+  </section>
+</PageLayout>

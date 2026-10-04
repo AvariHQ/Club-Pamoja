@@ -1,0 +1,46 @@
+---
+/**
+ * Family structure diagram: member at the centre, eligible registered family around them.
+ * The specific eligible categories are NOT published until confirmed (CR-02).
+ * Add confirmed categories to `categories` below; the diagram renders them automatically.
+ */
+import { fees, usd } from '../config/site';
+import ReviewNote from './ReviewNote.astro';
+
+/** TODO(CR-02): populate with categories exactly as defined in the bylaws, e.g. { label, note }. */
+const categories: { label: string; note?: string }[] = [];
+---
+<div class="cov">
+  <div class="cov__tier cov__tier--member" data-reveal>
+    <p class="cov__k">The member</p>
+    <p class="cov__title">You</p>
+    <p class="cov__body">Following a member’s death, each member is called to contribute <strong>{usd(fees.memberContribution)}</strong>.</p>
+  </div>
+  <div class="cov__link" aria-hidden="true"></div>
+  <div class="cov__tier cov__tier--family" data-reveal>
+    <p class="cov__k">Eligible registered family members</p>
+    {categories.length > 0 ? (
+      <ul class="cov__cats">{categories.map((c) => <li><strong>{c.label}</strong>{c.note && <span> — {c.note}</span>}</li>)}</ul>
+    ) : (
+      <p class="cov__title">Family members you register, as defined in the bylaws</p>
+    )}
+    <p class="cov__body">Following the death of an eligible registered family member, each member is called to contribute <strong>{usd(fees.familyContribution)}</strong>.</p>
+  </div>
+  <ReviewNote id="CR-02">List the eligible family categories (and any limits, e.g. number or age) exactly as defined in the bylaws.</ReviewNote>
+</div>
+<style>
+  .cov { display: grid; gap: 0; max-width: 46rem; }
+  .cov__tier { padding: var(--space-6); border-radius: var(--radius-md); }
+  .cov__tier--member { background: var(--cp-teal-900); color: var(--cp-white); }
+  .cov__tier--family { background: var(--cp-white); border: 1px solid var(--color-border-strong); }
+  .cov__link { width: 1px; height: var(--space-6); margin-left: var(--space-7); background: var(--cp-gold-500); }
+  .cov__k { font-size: var(--step--1); font-weight: 650; text-transform: uppercase; letter-spacing: var(--tracking-eyebrow); color: var(--color-accent-text); }
+  .cov__tier--member .cov__k { color: var(--cp-gold-500); }
+  .cov__title { font-family: var(--font-display); font-size: var(--step-3); line-height: 1.15; margin-top: var(--space-2); }
+  .cov__tier--family .cov__title { color: var(--cp-teal-900); font-size: var(--step-2); }
+  .cov__body { margin-top: var(--space-3); color: var(--color-text-muted); }
+  .cov__tier--member .cov__body { color: var(--color-text-inverse-muted); }
+  .cov__tier--member strong { color: var(--cp-gold-500); }
+  .cov__cats { list-style: none; padding: 0; margin-top: var(--space-3); display: grid; gap: var(--space-2); }
+  .cov__cats li { padding-left: var(--space-4); border-left: 2px solid var(--cp-gold-500); }
+</style>
